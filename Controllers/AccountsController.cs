@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -24,10 +25,17 @@ namespace YRPortal.Controllers
                 bool isValid = context.Logins.Any(x=> x.Username == model.Username && x.Password == model.Password);
                 if (isValid)
                 {
+                   
+                    bool isAdmin = context.Logins.Any(x => x.Role == "Admin");
+                    if (isAdmin)
+                    {
+                        return RedirectToAction("Index", "Logins");
+                    }
                     FormsAuthentication.SetAuthCookie(model.Username, false);
-                    return RedirectToAction("Index", "Students");
                 }
                 ModelState.AddModelError("", "Invalid username and password");
+
+                
             }
             return View();
         }
@@ -42,8 +50,27 @@ namespace YRPortal.Controllers
         {
             using(var context = new PortalEntities3())
             {
-                context.Logins.Add(model);
-                context.SaveChanges();
+                bool isFound = context.Logins.Any(x => x.Username == model.Username);
+                if (isFound)
+                {
+                    ViewBag.ErrorMessage = "Username already found";
+                    return RedirectToAction("Signup");
+                }
+                else if(!isFound && ModelState.IsValid && model.Role == "Student" || model.Role =="Instructor")
+                {
+                    context.Logins.Add(model);
+                    context.SaveChanges();
+                    FormsAuthentication.SetAuthCookie(model.Username, false);
+                }
+            }
+
+            if (model.Role == "Student")
+            {
+                return RedirectToAction("Create", "Students");
+            }
+            else if(model.Role == "Instructor")
+            {
+                return RedirectToAction("Create", "Instructors");
             }
             return RedirectToAction("login");
         }

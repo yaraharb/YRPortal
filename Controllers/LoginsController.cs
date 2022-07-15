@@ -10,108 +10,108 @@ using YRPortal.Models;
 
 namespace YRPortal.Controllers
 {
-    [Authorize]
-    public class StudentsController : Controller
+    [Authorize(Roles ="Admin")]
+    public class LoginsController : Controller
     {
         private PortalEntities3 db = new PortalEntities3();
-       
-        // GET: Students
+
+        // GET: Logins
         public ActionResult Index()
         {
-            return View(db.Students.ToList());
+            return View(db.Logins.ToList());
         }
 
-        // GET: Students/Details/5
+        // GET: Logins/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            Login login = db.Logins.Find(id);
+            if (login == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(login);
         }
-        
-        // GET: Students/Create
+
+        // GET: Logins/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Students/Create
+        // POST: Logins/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "StudentID,Fname,Lname")] Student student)
+        public ActionResult Create([Bind(Include = "ID,Username,Password,Role")] Login login)
         {
             if (ModelState.IsValid)
             {
-                db.Students.Add(student);
+                db.Logins.Add(login);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(student);
+            return View(login);
         }
 
-        // GET: Students/Edit/5
+        // GET: Logins/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            Login login = db.Logins.Find(id);
+            if (login == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(login);
         }
 
-        // POST: Students/Edit/5
+        // POST: Logins/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StudentID,Fname,Lname")] Student student)
+        public ActionResult Edit([Bind(Include = "ID,Username,Password,Role")] Login login)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(student).State = EntityState.Modified;
+                db.Entry(login).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(student);
+            return View(login);
         }
 
-        // GET: Students/Delete/5
+        // GET: Logins/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = db.Students.Find(id);
-            if (student == null)
+            Login login = db.Logins.Find(id);
+            if (login == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(login);
         }
 
-        // POST: Students/Delete/5
+        // POST: Logins/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = db.Students.Find(id);
-            db.Students.Remove(student);
+            Login login = db.Logins.Find(id);
+            db.Logins.Remove(login);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
