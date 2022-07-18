@@ -13,10 +13,10 @@ namespace YRPortal.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PortalEntities3 : DbContext
+    public partial class PortalEntities4 : DbContext
     {
-        public PortalEntities3()
-            : base("name=PortalEntities3")
+        public PortalEntities4()
+            : base("name=PortalEntities4")
         {
         }
     
@@ -26,10 +26,9 @@ namespace YRPortal.Models
         }
     
         public virtual DbSet<Course> Courses { get; set; }
-        public virtual DbSet<Enroll> Enrolls { get; set; }
         public virtual DbSet<Instructor> Instructors { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Student> Students { get; set; }
-        public virtual DbSet<Teach> Teaches { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
     }
 }

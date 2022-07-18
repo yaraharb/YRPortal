@@ -11,17 +11,21 @@ namespace YRPortal.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Login
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Login()
+        {
+            this.UserRoles = new HashSet<UserRole>();
+        }
+    
         public int ID { get; set; }
-        [Required]
-        [StringLength(50, ErrorMessage = "Username should be less than 50")]
         public string Username { get; set; }
-        [Required]
-        [StringLength(50, ErrorMessage = "Password should be less than 50")]
         public string Password { get; set; }
         public string Role { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

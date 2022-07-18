@@ -13,7 +13,7 @@ namespace YRPortal.Controllers
     [Authorize]
     public class InstructorsController : Controller
     {
-        private PortalEntities3 db = new PortalEntities3();
+        private PortalEntities4 db = new PortalEntities4();
         
         // GET: Instructors
         public ActionResult Index()

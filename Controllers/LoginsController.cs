@@ -10,14 +10,15 @@ using YRPortal.Models;
 
 namespace YRPortal.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles ="admin")]
     public class LoginsController : Controller
     {
-        private PortalEntities3 db = new PortalEntities3();
+        private PortalEntities4 db = new PortalEntities4();
 
         // GET: Logins
         public ActionResult Index()
         {
+
             return View(db.Logins.ToList());
         }
 

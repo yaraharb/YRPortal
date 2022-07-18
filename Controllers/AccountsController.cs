@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using YRPortal.Config;
 using YRPortal.Models;
 
 namespace YRPortal.Controllers
@@ -18,23 +20,46 @@ namespace YRPortal.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Models.Membership model)
+        public ActionResult Login(Models.Membership model, Login model1)
         {
-            using (var context = new PortalEntities3())
+            using (var context = new PortalEntities4())
             {
                 bool isValid = context.Logins.Any(x=> x.Username == model.Username && x.Password == model.Password);
                 if (isValid)
                 {
-                   
-                    bool isAdmin = context.Logins.Any(x => x.Role == "Admin");
-                    if (isAdmin)
+                    PortalEntities4 db = new PortalEntities4();
+                    String role;
+                    using (SqlConnection con = new SqlConnection(StoreConnection.GetConnection()))
                     {
+                        using (SqlCommand cmd = new SqlCommand("SELECT Role FROM Login WHERE Username ='" + model.Username + "' AND Password ='" + model.Password + "' ", con))
+                        {
+                            if (con.State != System.Data.ConnectionState.Open)
+                                con.Open();
+                            
+                            role = (string)cmd.ExecuteScalar();
+                        }
+                    }
+                    if (role.ToString() == "Student")
+                    {
+                        FormsAuthentication.SetAuthCookie(model.Username, false);
+                        return RedirectToAction("Create", "Students");
+                    }
+
+                    if (role.ToString() == "admin")
+                    {
+                        FormsAuthentication.SetAuthCookie(model.Username, false);
                         return RedirectToAction("Index", "Logins");
                     }
-                    FormsAuthentication.SetAuthCookie(model.Username, false);
-                }
-                ModelState.AddModelError("", "Invalid username and password");
 
+                    if (role.ToString() == "Instructor")
+                    {
+                        FormsAuthentication.SetAuthCookie(model.Username, false);
+                        return RedirectToAction("Create", "Instructors");
+                    }
+                }
+                else { 
+                ModelState.AddModelError("", "Invalid username and password");
+                }
                 
             }
             return View();
@@ -48,7 +73,7 @@ namespace YRPortal.Controllers
         [HttpPost]
         public ActionResult Signup(Login model)
         {
-            using(var context = new PortalEntities3())
+            using(var context = new PortalEntities4())
             {
                 bool isFound = context.Logins.Any(x => x.Username == model.Username);
                 if (isFound)
