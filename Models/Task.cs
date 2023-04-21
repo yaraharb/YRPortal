@@ -11,15 +11,17 @@ namespace YRPortal.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Task
     {
         public int id { get; set; }
         public string title { get; set; }
         public string content { get; set; }
+        [DataType(DataType.Date)]
         public System.DateTime deadline { get; set; }
-        public int student_id { get; set; }
+        public Nullable<int> StudentID { get; set; }
     
-        public virtual Student Student { get; set; }
+        public virtual Login Login { get; set; }
     }
 }

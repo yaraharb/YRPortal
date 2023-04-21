@@ -81,43 +81,6 @@ namespace YRPortal.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Signup(Login model)
-        {
-            using(var context = new PortalEntities4())
-            {
-                bool isFound = context.Logins.Any(x => x.Username == model.Username);
-                if (isFound)
-                {
-                    ViewBag.ErrorMessage = "Username already found";
-                    return RedirectToAction("Signup");
-                }
-                else if(!isFound && ModelState.IsValid && model.Role == "Student" || model.Role =="Instructor")
-                {   
-                    if(model.Role == "Student")
-                    {
-                        model.Username = model.Username + "@bb.edu";
-                    }
-                    if (model.Role == "Instructor")
-                    {
-                        model.Username = model.Username + "@bb.edu.lb";
-                    }
-                    context.Logins.Add(model);
-                    context.SaveChanges();
-                    FormsAuthentication.SetAuthCookie(model.Username, false);
-                }
-            }
-
-            if (model.Role == "Student")
-            {
-                return RedirectToAction("Create", "Students");
-            }
-            else if(model.Role == "Instructor")
-            {
-                return RedirectToAction("Create", "Instructors");
-            }
-            return RedirectToAction("login");
-        }
 
         public ActionResult Logout()
         {

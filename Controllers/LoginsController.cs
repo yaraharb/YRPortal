@@ -61,6 +61,7 @@ namespace YRPortal.Controllers
                 user.Username = username;
                 user.Password = username;
                 user.Role = model.role;
+
                 bool isFound = context.Logins.Any(x => x.Username == username);
                 if (isFound)
                 {
@@ -76,6 +77,8 @@ namespace YRPortal.Controllers
                         student.FName = model.firstname;
                         student.Lname = model.lastname;
                         student.Major = model.description;
+                        student.LoginId = model.ID;
+                        
                         db.Students.Add(student);
                     }
                     if (model.role == "Instructor")

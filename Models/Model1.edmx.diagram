@@ -11,15 +11,15 @@
         <EntityTypeShape EntityType="PortalModel.Student" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModel.UserRole" Width="1.5" PointX="3" PointY="6.875" />
         <AssociationConnector Association="PortalModel.FK_UserRole_Login" />
-        <EntityTypeShape EntityType="PortalModel.EnrollsIn" Width="1.5" PointX="6" PointY="4.25" />
         <EntityTypeShape EntityType="PortalModel.Teach" Width="1.5" PointX="5" PointY="0.75" />
-        <AssociationConnector Association="PortalModel.FK_EnrollsIn_Course" />
         <AssociationConnector Association="PortalModel.FK_Teaches_Course" />
-        <AssociationConnector Association="PortalModel.FK_EnrollsIn_Student" />
         <AssociationConnector Association="PortalModel.FK_Teaches_Instructor" />
+        <EntityTypeShape EntityType="PortalModel.EnrollsIn" Width="1.5" PointX="6" PointY="4.375" />
+        <AssociationConnector Association="PortalModel.FK_EnrollsIn_Course" />
         <AssociationConnector Association="PortalModel.FK_EnrollsIn_Login" />
-        <EntityTypeShape EntityType="PortalModel.Task" Width="1.5" PointX="5" PointY="9.75" />
-        <AssociationConnector Association="PortalModel.FK__Task__student_id__05D8E0BE" />
+        <AssociationConnector Association="PortalModel.FK__Student__LoginId__06CD04F7" />
+        <EntityTypeShape EntityType="PortalModel.Task" Width="1.5" PointX="3" PointY="10" />
+        <AssociationConnector Association="PortalModel.FK__Task__StudentID__08B54D69" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
