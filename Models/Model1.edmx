@@ -13,6 +13,14 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="EnrollsIn">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoginID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Instructor">
           <Key>
             <PropertyRef Name="InstructorID" />
@@ -40,6 +48,24 @@
           <Property Name="Lname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Major" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="content" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="deadline" Type="date" Nullable="false" />
+          <Property Name="student_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teaches">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InstructorID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -48,6 +74,66 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Task__student_id__05D8E0BE">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="student_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnrollsIn_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="EnrollsIn" Type="Self.EnrollsIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="EnrollsIn">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnrollsIn_Login">
+          <End Role="Login" Type="Self.Login" Multiplicity="1" />
+          <End Role="EnrollsIn" Type="Self.EnrollsIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnrollsIn">
+              <PropertyRef Name="LoginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teaches_Course">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Teaches" Type="Self.Teaches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Teaches">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teaches_Instructor">
+          <End Role="Instructor" Type="Self.Instructor" Multiplicity="1" />
+          <End Role="Teaches" Type="Self.Teaches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="InstructorID" />
+            </Principal>
+            <Dependent Role="Teaches">
+              <PropertyRef Name="InstructorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserRole_Login">
           <End Role="Login" Type="Self.Login" Multiplicity="1" />
           <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
@@ -62,10 +148,33 @@
         </Association>
         <EntityContainer Name="PortalModelStoreContainer">
           <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EnrollsIn" EntityType="Self.EnrollsIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Instructor" EntityType="Self.Instructor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teaches" EntityType="Self.Teaches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Task__student_id__05D8E0BE" Association="Self.FK__Task__student_id__05D8E0BE">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnrollsIn_Course" Association="Self.FK_EnrollsIn_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="EnrollsIn" EntitySet="EnrollsIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnrollsIn_Login" Association="Self.FK_EnrollsIn_Login">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="EnrollsIn" EntitySet="EnrollsIn" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teaches_Course" Association="Self.FK_Teaches_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Teaches" EntitySet="Teaches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teaches_Instructor" Association="Self.FK_Teaches_Instructor">
+            <End Role="Instructor" EntitySet="Instructor" />
+            <End Role="Teaches" EntitySet="Teaches" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserRole_Login" Association="Self.FK_UserRole_Login">
             <End Role="Login" EntitySet="Login" />
             <End Role="UserRole" EntitySet="UserRole" />
@@ -82,6 +191,8 @@
           <Property Name="CourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EnrollsIns" Relationship="PortalModel.FK_EnrollsIn_Course" FromRole="Course" ToRole="EnrollsIn" />
+          <NavigationProperty Name="Teaches" Relationship="PortalModel.FK_Teaches_Course" FromRole="Course" ToRole="Teach" />
         </EntityType>
         <EntityType Name="Instructor">
           <Key>
@@ -91,6 +202,7 @@
           <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Salary" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Teaches" Relationship="PortalModel.FK_Teaches_Instructor" FromRole="Instructor" ToRole="Teach" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -101,6 +213,7 @@
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="UserRoles" Relationship="PortalModel.FK_UserRole_Login" FromRole="Login" ToRole="UserRole" />
+          <NavigationProperty Name="EnrollsIns" Relationship="PortalModel.FK_EnrollsIn_Login" FromRole="Login" ToRole="EnrollsIn" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -110,6 +223,8 @@
           <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Major" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EnrollsIns" Relationship="PortalModel.FK_EnrollsIn_Student" FromRole="Student" ToRole="EnrollsIn" />
+          <NavigationProperty Name="Tasks" Relationship="PortalModel.FK__Task__student_id__05D8E0BE" FromRole="Student" ToRole="Task" />
         </EntityType>
         <EntityContainer Name="PortalEntities4" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Courses" EntityType="Self.Course" />
@@ -120,6 +235,33 @@
           <AssociationSet Name="FK_UserRole_Login" Association="PortalModel.FK_UserRole_Login">
             <End Role="Login" EntitySet="Logins" />
             <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <EntitySet Name="EnrollsIns" EntityType="PortalModel.EnrollsIn" />
+          <EntitySet Name="Teaches" EntityType="PortalModel.Teach" />
+          <AssociationSet Name="FK_EnrollsIn_Course" Association="PortalModel.FK_EnrollsIn_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="EnrollsIn" EntitySet="EnrollsIns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teaches_Course" Association="PortalModel.FK_Teaches_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Teach" EntitySet="Teaches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnrollsIn_Student" Association="PortalModel.FK_EnrollsIn_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="EnrollsIn" EntitySet="EnrollsIns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teaches_Instructor" Association="PortalModel.FK_Teaches_Instructor">
+            <End Role="Instructor" EntitySet="Instructors" />
+            <End Role="Teach" EntitySet="Teaches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EnrollsIn_Login" Association="PortalModel.FK_EnrollsIn_Login">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="EnrollsIn" EntitySet="EnrollsIns" />
+          </AssociationSet>
+          <EntitySet Name="Tasks" EntityType="PortalModel.Task" />
+          <AssociationSet Name="FK__Task__student_id__05D8E0BE" Association="PortalModel.FK__Task__student_id__05D8E0BE">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Task" EntitySet="Tasks" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="UserRole">
@@ -140,6 +282,111 @@
             </Principal>
             <Dependent Role="UserRole">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EnrollsIn">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="PortalModel.FK_EnrollsIn_Course" FromRole="EnrollsIn" ToRole="Course" />
+          <NavigationProperty Name="Student" Relationship="PortalModel.FK_EnrollsIn_Student" FromRole="EnrollsIn" ToRole="Student" />
+          <Property Name="LoginID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Login" Relationship="PortalModel.FK_EnrollsIn_Login" FromRole="EnrollsIn" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="Teach">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InstructorID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="PortalModel.FK_Teaches_Course" FromRole="Teach" ToRole="Course" />
+          <NavigationProperty Name="Instructor" Relationship="PortalModel.FK_Teaches_Instructor" FromRole="Teach" ToRole="Instructor" />
+        </EntityType>
+        <Association Name="FK_EnrollsIn_Course">
+          <End Type="PortalModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="PortalModel.EnrollsIn" Role="EnrollsIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="EnrollsIn">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teaches_Course">
+          <End Type="PortalModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="PortalModel.Teach" Role="Teach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Teach">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnrollsIn_Student">
+          <End Type="PortalModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="PortalModel.EnrollsIn" Role="EnrollsIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="EnrollsIn">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teaches_Instructor">
+          <End Type="PortalModel.Instructor" Role="Instructor" Multiplicity="1" />
+          <End Type="PortalModel.Teach" Role="Teach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructor">
+              <PropertyRef Name="InstructorID" />
+            </Principal>
+            <Dependent Role="Teach">
+              <PropertyRef Name="InstructorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EnrollsIn_Login">
+          <End Type="PortalModel.Login" Role="Login" Multiplicity="1" />
+          <End Type="PortalModel.EnrollsIn" Role="EnrollsIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EnrollsIn">
+              <PropertyRef Name="LoginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="content" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="deadline" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="student_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="PortalModel.FK__Task__student_id__05D8E0BE" FromRole="Task" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK__Task__student_id__05D8E0BE">
+          <End Type="PortalModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="PortalModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="student_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -194,6 +441,35 @@
                 <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EnrollsIns">
+            <EntityTypeMapping TypeName="PortalModel.EnrollsIn">
+              <MappingFragment StoreEntitySet="EnrollsIn">
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teaches">
+            <EntityTypeMapping TypeName="PortalModel.Teach">
+              <MappingFragment StoreEntitySet="Teaches">
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="InstructorID" ColumnName="InstructorID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="PortalModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="student_id" ColumnName="student_id" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

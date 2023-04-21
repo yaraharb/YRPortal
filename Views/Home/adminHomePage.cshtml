@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<YRPortal.Models.Login>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "adminHomePage";
 }
 
-<h2>Index</h2>
+<h2>adminHomePage</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -38,12 +38,8 @@
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
             @Html.ActionLink("Details", "Details", new { id=item.ID }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-
         </td>
-        
     </tr>
 }
 
 </table>
-<a href="/Courses/Index" type="button" class="btn btn-primary">Manage Courses</a>
-<a href="~/Instructors/Index" type="button" class="btn btn-primary">Manage Instructors</a>

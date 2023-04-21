@@ -18,6 +18,7 @@ namespace YRPortal.Models
         public Login()
         {
             this.UserRoles = new HashSet<UserRole>();
+            this.EnrollsIns = new HashSet<EnrollsIn>();
         }
     
         public int ID { get; set; }
@@ -27,5 +28,7 @@ namespace YRPortal.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRole> UserRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EnrollsIn> EnrollsIns { get; set; }
     }
 }

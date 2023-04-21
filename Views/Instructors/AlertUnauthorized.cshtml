@@ -1,0 +1,11 @@
+﻿                                                                    
+@{
+    ViewBag.Title = "AlertUnauthorized";
+}
+
+<h2>AlertUnauthorized</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-warning">@ViewBag.Message</div>
+}

@@ -21,6 +21,12 @@ namespace YRPortal.Controllers
             return View(db.Students.ToList());
         }
 
+
+        public ActionResult changePassword()
+        {
+            return View();
+        }
+
         // GET: Students/Details/5
         public ActionResult Details(int? id)
         {

@@ -38,14 +38,25 @@ namespace YRPortal.Controllers
                             
                             role = (string)cmd.ExecuteScalar();
                         }
+
                     }
                     if (role.ToString() == "Student")
                     {
                         FormsAuthentication.SetAuthCookie(model.Username, false);
-                        return RedirectToAction("Create", "Students");
+                        using (SqlConnection con = new SqlConnection(StoreConnection.GetConnection()))
+                        {
+                            using (SqlCommand cmd1 = new SqlCommand("SELECT ID FROM Login WHERE Username ='" + model.Username + "' AND Password ='" + model.Password + "' ", con))
+                            {
+                                if (con.State != System.Data.ConnectionState.Open)
+                                    con.Open();
+
+                                GlobalID.ID = (int)cmd1.ExecuteScalar();
+                            }
+                        }
+                        return RedirectToAction("StudentView", "Courses");
                     }
 
-                    if (role.ToString() == "admin")
+                     if (role.ToString() == "admin")
                     {
                         FormsAuthentication.SetAuthCookie(model.Username, false);
                         return RedirectToAction("Index", "Logins");
@@ -64,7 +75,7 @@ namespace YRPortal.Controllers
             }
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         public ActionResult Signup()
         {
             return View();
@@ -82,7 +93,15 @@ namespace YRPortal.Controllers
                     return RedirectToAction("Signup");
                 }
                 else if(!isFound && ModelState.IsValid && model.Role == "Student" || model.Role =="Instructor")
-                {
+                {   
+                    if(model.Role == "Student")
+                    {
+                        model.Username = model.Username + "@bb.edu";
+                    }
+                    if (model.Role == "Instructor")
+                    {
+                        model.Username = model.Username + "@bb.edu.lb";
+                    }
                     context.Logins.Add(model);
                     context.SaveChanges();
                     FormsAuthentication.SetAuthCookie(model.Username, false);

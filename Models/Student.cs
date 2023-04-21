@@ -14,9 +14,21 @@ namespace YRPortal.Models
     
     public partial class Student
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Student()
+        {
+            this.EnrollsIns = new HashSet<EnrollsIn>();
+            this.Tasks = new HashSet<Task>();
+        }
+    
         public int StudentId { get; set; }
         public string FName { get; set; }
         public string Lname { get; set; }
         public string Major { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EnrollsIn> EnrollsIns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Task> Tasks { get; set; }
     }
 }
