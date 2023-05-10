@@ -19,10 +19,11 @@ namespace YRPortal.Controllers
         // GET: Task
         public ActionResult Index()
         {
+
             List<Task> tasks = new List<Task>();
             using (SqlConnection con = new SqlConnection(StoreConnection.GetConnection()))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Task WHERE StudentId ='" + GlobalID.ID + "' ", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Task WHERE task.StudentId ='" + GlobalID.ID + "' ", con))
                 {
                     if (con.State != System.Data.ConnectionState.Open)
                         con.Open();
@@ -34,7 +35,7 @@ namespace YRPortal.Controllers
                         tasks.Add(
                             new Task
                             {
-                                id = int.Parse(row["id"].ToString()),
+                                id = Convert.ToInt32(row["ID"]),
                                 title = row["title"].ToString(),
                                 content = row["content"].ToString(),
                                 deadline = DateTime.Parse(row["deadline"].ToString())
@@ -66,7 +67,7 @@ namespace YRPortal.Controllers
         // GET: Task/Create
         public ActionResult Create()
         {
-            ViewBag.StudentID = new SelectList(db.Logins, "ID", "Username");
+            ViewBag.student_id = new SelectList(db.Students, "StudentId", "FName");
             return View();
         }
 
@@ -75,7 +76,7 @@ namespace YRPortal.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,title,content,deadline,StudentID")] Task task)
+        public ActionResult Create([Bind(Include = "id,title,content,deadline,student_id")] Task task)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +86,6 @@ namespace YRPortal.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StudentID = new SelectList(db.Logins, "ID", "Username", task.StudentID);
             return View(task);
         }
 
@@ -97,11 +97,11 @@ namespace YRPortal.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Task task = db.Tasks.Find(id);
+
             if (task == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.StudentID = new SelectList(db.Logins, "ID", "Username", task.StudentID);
             return View(task);
         }
 
@@ -110,17 +110,15 @@ namespace YRPortal.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,title,content,deadline,StudentID")] Task task)
+        public ActionResult Edit([Bind(Include = "id,title,content,deadline,student_id")] Task task)
         {
             if (ModelState.IsValid)
             {
-                task.StudentID = GlobalID.ID;
                 db.Entry(task).State = EntityState.Modified;
-                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.StudentID = new SelectList(db.Logins, "ID", "Username", task.StudentID);
+ 
             return View(task);
         }
 

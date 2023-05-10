@@ -21,6 +21,7 @@ namespace YRPortal.Models
             this.EnrollsIns = new HashSet<EnrollsIn>();
             this.Students = new HashSet<Student>();
             this.Tasks = new HashSet<Task>();
+            this.Notes = new HashSet<Note>();
         }
     
         public int ID { get; set; }
@@ -36,5 +37,7 @@ namespace YRPortal.Models
         public virtual ICollection<Student> Students { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Task> Tasks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Note> Notes { get; set; }
     }
 }

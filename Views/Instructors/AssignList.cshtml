@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<YRPortal.Models.Course>
 
 @{
-    ViewBag.Title = "List of courses that can be assigned";
+    ViewBag.Title = "AssignList";
 }
 
 <h2>List of courses that can be assigned</h2>
@@ -33,7 +33,7 @@
                 <input type="hidden" name="id" value="@item.CourseID" />
                 <button type="submit" class="btn btn-primary">Assign</button>
             </form>
-        </td>
+        </td>s
     </tr>
 }
 

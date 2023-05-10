@@ -3,46 +3,37 @@
 @{
     ViewBag.Title = "Index";
 }
+<link rel="stylesheet" href="../../css/loginPage.css">
+<link rel="stylesheet" href="../../css/loginPageCard.css">
 
-<h2>Index</h2>
+<h2>Admin's Dashboard</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Username)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Role)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-        
-    </tr>
-}
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <p class="card-title"><strong>Username: </strong>@Html.DisplayFor(modelItem => item.Username)</p>
+                    <p class="card-text"><strong>Password: </strong>@Html.DisplayFor(modelItem => item.Password)</p>
+                    <p class="card-text"><strong>Role: </strong>@Html.DisplayFor(modelItem => item.Role)</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group buttonText">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-sm btn-outline-secondary", style = "color: #3c6173;" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-sm btn-outline-secondary", style = "color: red;" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
-</table>
+
+</div>
+
 <a href="/Courses/Index" type="button" class="btn btn-primary">Manage Courses</a>
 <a href="~/Instructors/Index" type="button" class="btn btn-primary">Manage Instructors</a>

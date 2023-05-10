@@ -20,26 +20,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lname)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.InstructorID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.InstructorID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.InstructorID })
-        </td>
-        <td>
-            <form action="/Instructors/AssignList" method="post">
-                <input type="hidden" name="id" value="@item.InstructorID" />
-                <button type="submit" class="btn btn-primary">Assign Courses</button>
-            </form>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lname)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.InstructorID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.InstructorID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.InstructorID })
+            </td>
+            <td>
+                <form action="/Instructors/AssignList" method="post">
+                    <input type="hidden" name="id" value="@item.InstructorID" />
+                    <button type="submit" class="btn btn-primary">Assign Courses</button>
+                </form>
+            </td>
+        </tr>
+    }
 
 </table>
+<div>
+    @Html.ActionLink("Back to List", "Index", "Logins")
+</div>

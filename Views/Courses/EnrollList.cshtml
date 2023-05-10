@@ -4,7 +4,7 @@
     ViewBag.Title = "EnrollList";
 }
 
-<h2>EnrollList</h2>
+<h2>Registration</h2>
 
 
 <table class="table">
@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            Enrollin
+            Register
         </th>
         <th></th>
     </tr>
@@ -39,3 +39,6 @@
 }
 
 </table>
+<div>
+    @Html.ActionLink("Back to List", "StudentView", "Courses")
+</div>

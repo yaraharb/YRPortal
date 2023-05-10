@@ -33,5 +33,6 @@ namespace YRPortal.Models
         public virtual DbSet<Teach> Teaches { get; set; }
         public virtual DbSet<EnrollsIn> EnrollsIns { get; set; }
         public virtual DbSet<Task> Tasks { get; set; }
+        public virtual DbSet<Note> Notes { get; set; }
     }
 }

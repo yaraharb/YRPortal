@@ -11,15 +11,17 @@ namespace YRPortal.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Task
+    using System.Web;
+
+    public partial class Note
     {
         public int id { get; set; }
         public string title { get; set; }
         public string content { get; set; }
-        public System.DateTime deadline { get; set; }
-        public Nullable<int> StudentID { get; set; }
-    
+        public string status { get; set; }
+        public int author { get; set; }
+        public string courseName { get; set; }
+        public HttpPostedFileBase UploadFile { get; set; }
         public virtual Login Login { get; set; }
     }
 }
