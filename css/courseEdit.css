@@ -1,0 +1,31 @@
+﻿.form-horizontal {
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+.control-label {
+	font-weight: bold;
+}
+
+.form-control {
+	width: 100%;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	padding: 8px;
+	box-sizing: border-box;
+	margin-bottom: 10px;
+}
+
+.btn {
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 10px 20px;
+	border-radius: 4px;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+	.btn:hover {
+		background-color: #3e8e41;
+	}

@@ -1,0 +1,49 @@
+
+form {
+  border: 50px solid #f1f1f1;
+  width: 100% !important;
+  margin: 5% auto auto auto;
+}
+.boxes {
+    margin-left: 35%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+input[type=text], input[type=password] {
+    padding: 12px 20px;
+    border: 1px solid #193441;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+
+.loginButton {
+    background-color: #193441;
+    color: white;
+    padding: 8px 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    margin-left: 13%;
+    margin-top: 2%;
+}
+.loginButton:hover {
+        opacity: 0.9;
+    }
+
+.imageContainer {
+  text-align: center;
+}
+
+img.logo {
+  margin-top: 5%;
+  width: 10%;
+  border-radius: 50%;
+}
+
+
+
+
+

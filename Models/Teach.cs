@@ -14,9 +14,9 @@ namespace YRPortal.Models
     
     public partial class Teach
     {
-        public int TableID { get; set; }
+        public int ID { get; set; }
+        public int InstructorID { get; set; }
         public int CourseID { get; set; }
-        public int IntructorID { get; set; }
     
         public virtual Course Course { get; set; }
         public virtual Instructor Instructor { get; set; }

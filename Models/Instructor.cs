@@ -22,7 +22,8 @@ namespace YRPortal.Models
     
         public int InstructorID { get; set; }
         public string Fname { get; set; }
-        public string Lname { get; set; }
+        public string lname { get; set; }
+        public int Salary { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Teach> Teaches { get; set; }

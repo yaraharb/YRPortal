@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Alert";
+}
+
+<h2>Alert</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.AlertMessage))
+{
+    <div class="alert alert-danger">@ViewBag.AlertMessage</div>
+}
+<a href="/Courses/StudentView" type="button" class="btn btn-primary">Go back the the main page</a>

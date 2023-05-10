@@ -10,26 +10,29 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+            <div class="navbar-header"><img src="/images/Logo - BrainBoost.png" alt="Logo" style="width: 50px; margin-right: 10px" /></div>
             <div class="navbar-header">
+
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
+
                 </button>
-                @Html.ActionLink("YRPortal", "Index", "Students", new { area = "" }, new { @class = "navbar-brand" })
+                <span class="navbar-brand">BrainBoost</span>
+
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Get list", "Index", "Students")</li>
-                    <li>@Html.ActionLink("Create", "Create", "Students")</li>
+                <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li> <a> Dear - @User.Identity.Name </a> </li>
-                        <li>@Html.ActionLink("Logout", "Logout", "Accounts")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Accounts", null, new { style = "font-size: 16px;" })</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Login", "Login", "Accounts")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Accounts", null, new { style = "font-size: 16px;" })</li>
+
                     }
 
                 </ul>
@@ -38,9 +41,8 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
 

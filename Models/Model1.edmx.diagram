@@ -4,17 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="154d1578f7b24c3492e165c956907423" Name="Diagram1">
-        <EntityTypeShape EntityType="PortalModel.Course" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortalModel.Enroll" Width="1.5" PointX="0.5" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortalModel.Instructor" Width="1.5" PointX="7" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortalModel.Login" Width="1.5" PointX="7" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortalModel.Student" Width="1.5" PointX="4" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortalModel.Teach" Width="1.5" PointX="4" PointY="0.5" IsExpanded="true" />
-        <AssociationConnector Association="PortalModel.FK_Enrolls_Course1" ManuallyRouted="false" />
-        <AssociationConnector Association="PortalModel.FK_Teaches_Course" ManuallyRouted="false" />
-        <AssociationConnector Association="PortalModel.FK_Enrolls_Student1" ManuallyRouted="false" />
-        <AssociationConnector Association="PortalModel.FK_Teaches_Instructor" ManuallyRouted="false" />
+      <Diagram DiagramId="34a92ac1a1c440eb87664287fe794941" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="PortalModel.Course" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortalModel.Instructor" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortalModel.Login" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortalModel.Student" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortalModel.UserRole" Width="1.5" PointX="3" PointY="6.875" />
+        <AssociationConnector Association="PortalModel.FK_UserRole_Login" />
+        <EntityTypeShape EntityType="PortalModel.Teach" Width="1.5" PointX="5" PointY="0.75" />
+        <AssociationConnector Association="PortalModel.FK_Teaches_Course" />
+        <AssociationConnector Association="PortalModel.FK_Teaches_Instructor" />
+        <EntityTypeShape EntityType="PortalModel.EnrollsIn" Width="1.5" PointX="6" PointY="4.375" />
+        <AssociationConnector Association="PortalModel.FK_EnrollsIn_Course" />
+        <AssociationConnector Association="PortalModel.FK_EnrollsIn_Login" />
+        <AssociationConnector Association="PortalModel.FK__Student__LoginId__06CD04F7" />
+        <EntityTypeShape EntityType="PortalModel.Task" Width="1.5" PointX="0.5" PointY="7.75" />
+        <AssociationConnector Association="PortalModel.FK__Task__StudentID__08B54D69" />
+        <EntityTypeShape EntityType="PortalModel.Note" Width="1.5" PointX="4.5" PointY="9.875" />
+        <AssociationConnector Association="PortalModel.FK__Note__author__14270015" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

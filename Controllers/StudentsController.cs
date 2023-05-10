@@ -10,15 +10,21 @@ using YRPortal.Models;
 
 namespace YRPortal.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Student")]
     public class StudentsController : Controller
     {
-        private PortalEntities3 db = new PortalEntities3();
-
+        private PortalEntities4 db = new PortalEntities4();
+       
         // GET: Students
         public ActionResult Index()
         {
             return View(db.Students.ToList());
+        }
+
+
+        public ActionResult changePassword()
+        {
+            return View();
         }
 
         // GET: Students/Details/5
@@ -35,7 +41,7 @@ namespace YRPortal.Controllers
             }
             return View(student);
         }
-
+        
         // GET: Students/Create
         public ActionResult Create()
         {
