@@ -20,9 +20,6 @@
         <th>
             @Html.DisplayNameFor(model => model.deadline)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Login.Username)
-        </th>
         <th></th>
     </tr>
 
@@ -41,7 +38,6 @@
 
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.id })
             </td>
         </tr>
