@@ -10,7 +10,7 @@ using YRPortal.Models;
 
 namespace YRPortal.Controllers
 {
-    [Authorize(Roles = "Student")]
+
     public class StudentsController : Controller
     {
         private PortalEntities4 db = new PortalEntities4();
