@@ -5,6 +5,7 @@
 }
 
 <h2>My Dashboard</h2>
+<link href="@Url.Content("~/css/StudentView.css")" rel="stylesheet" type="text/css" />
 
 <p>
     @Html.ActionLink("Enroll in Courses", "EnrollList")
@@ -20,19 +21,20 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.CourseID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.CourseID })
+            </td>
+        </tr>
+    }
 
 </table>
 <a href="~/Students/changePassword" type="button" class="btn btn-primary">Change Password</a>
