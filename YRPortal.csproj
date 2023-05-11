@@ -230,6 +230,7 @@
     <Content Include="css\Create.css" />
     <Content Include="css\loginPage.css" />
     <Content Include="css\loginPageCard.css" />
+    <Content Include="css\media.css" />
     <Content Include="css\StudentView.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

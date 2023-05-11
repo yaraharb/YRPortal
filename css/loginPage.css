@@ -4,11 +4,13 @@ form {
   width: 100% !important;
   margin: 5% auto auto auto;
 }
+
 .boxes {
-    margin-left: 35%;
+    margin-left: 37%;
     margin-top: 5%;
     margin-bottom: 5%;
 }
+
 input[type=text], input[type=password] {
     padding: 12px 20px;
     border: 1px solid #193441;
@@ -85,4 +87,12 @@ img.logo {
 
 .btn-primary {
     background-color: #193441;
+    margin-bottom: 2%;
+    
+}
+.bottombtn {
+    position: relative;
+    float: right;
+    margin-top: 5%;
+    margin-right: 1%;
 }

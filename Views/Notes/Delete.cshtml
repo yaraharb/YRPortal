@@ -11,7 +11,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-           Title
+            Title
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-           Content
+            Content
         </dt>
 
         <dd>
@@ -43,11 +43,15 @@
         </dd>
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
-
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" style="color: white; background-color: #193441"/> |
+            <input type="submit" value="Delete" class="btn btn-default" style="background-color: #de1a04; color: white;" />
+            <a href="/Logins/Index" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">Back</a>
+        </div>
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" style="color: white; background-color: #193441" /> |
             @Html.ActionLink("Back to List", "../Notes/Index")
         </div>
     }

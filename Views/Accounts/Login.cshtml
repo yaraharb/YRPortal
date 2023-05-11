@@ -4,6 +4,7 @@
     ViewBag.Title = "Login";
 }
 <link rel="stylesheet" href="../../css/loginPage.css">
+<link href="@Url.Content("../css/media.css")" rel="stylesheet" type="text/css" />
 
 
 @using (Html.BeginForm())
@@ -17,11 +18,11 @@
     <div class="col-12 mx-0 px-0">
         <div class="boxes">
             <div class="form-group col-12">
-                <div class="col-6">
+                <div class="col-6 toMove">
                     @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label" })
                 </div>
                 <div>
-                    <div class="col-6">
+                    <div class="col-6 toMove">
                         @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your username" } })
                         @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
                     </div>
@@ -29,9 +30,9 @@
             </div>
 
             <div>
-                <div class="form-group">
+                <div class="form-group toMove">
                     @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
-                    <div>
+                    <div class="toMove">
                         @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your password", type = "password" } })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>

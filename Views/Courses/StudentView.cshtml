@@ -3,13 +3,13 @@
 @{
     ViewBag.Title = "StudentView";
 }
-
-<h2>My Dashboard</h2>
 <link href="@Url.Content("~/css/StudentView.css")" rel="stylesheet" type="text/css" />
+<h2>My Dashboard</h2>
+<div>
+    <a href="/Courses/EnrollList" type="button" class="btn btn-primary enrollbtn"}>Enroll in Courses</a>
+    <a href="~/Students/changePassword" type="button" class="btn btn-primary changeBtn">Change Password</a>
+</div>
 
-<p>
-    @Html.ActionLink("Enroll in Courses", "EnrollList")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -37,6 +37,6 @@
     }
 
 </table>
-<a href="~/Students/changePassword" type="button" class="btn btn-primary">Change Password</a>
-<a href="~/Task/Index" type="button" class="btn btn-primary">View Tasks</a>
-<a href="~/Notes/Index" type="button" class="btn btn-primary">View Notes</a>
+
+<a href="~/Task/Index" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">View Tasks</a>
+<a href="~/Notes/Index" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative;float: right; margin-top: 2%; margin-right: 1%;">View Notes</a>

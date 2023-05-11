@@ -1,3 +1,12 @@
-﻿.btn-primary {
-	background-color: #193441;
+﻿.changeBtn {
+    background-color: #193441;
+    position: relative;
+    float: right;
+    margin-bottom: 1%;
+}
+.enrollbtn {
+    background-color: #193441;
+    position: relative;
+    float: left;
+    margin-bottom: 1%
 }
