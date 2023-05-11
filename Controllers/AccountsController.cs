@@ -64,8 +64,18 @@ namespace YRPortal.Controllers
 
                     if (role.ToString() == "Instructor")
                     {
+                        using (SqlConnection con = new SqlConnection(StoreConnection.GetConnection()))
+                        {
+                            using (SqlCommand cmd1 = new SqlCommand("SELECT ID FROM Login WHERE Username ='" + model.Username + "' AND Password ='" + model.Password + "' ", con))
+                            {
+                                if (con.State != System.Data.ConnectionState.Open)
+                                    con.Open();
+
+                                GlobalID.ID = (int)cmd1.ExecuteScalar();
+                            }
+                        }
                         FormsAuthentication.SetAuthCookie(model.Username, false);
-                        return RedirectToAction("Create", "Instructors");
+                        return RedirectToAction("InstructorView", "Courses");
                     }
                 }
                 else { 
@@ -75,7 +85,7 @@ namespace YRPortal.Controllers
             }
             return View();
         }
-        [Authorize(Roles = "admin")]
+
         public ActionResult Signup()
         {
             return View();

@@ -29,6 +29,7 @@
           <Property Name="Fname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="lname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Salary" Type="int" Nullable="false" />
+          <Property Name="LoginID" Type="int" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -75,7 +76,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="InstructorID" Type="int" Nullable="false" />
+          <Property Name="LoginID" Type="int" Nullable="false" />
           <Property Name="CourseID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserRole">
@@ -86,18 +87,6 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Note__author__14270015">
-          <End Role="Login" Type="Self.Login" Multiplicity="1" />
-          <End Role="Note" Type="Self.Note" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Login">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Note">
-              <PropertyRef Name="author" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Student__LoginId__06CD04F7">
           <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
@@ -119,6 +108,30 @@
             </Principal>
             <Dependent Role="Task">
               <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teaches__CourseI__40F9A68C">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="Teaches" Type="Self.Teaches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Teaches">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teaches__LoginID__40058253">
+          <End Role="Login" Type="Self.Login" Multiplicity="1" />
+          <End Role="Teaches" Type="Self.Teaches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Teaches">
+              <PropertyRef Name="LoginID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -146,30 +159,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Teaches_Course">
-          <End Role="Course" Type="Self.Course" Multiplicity="1" />
-          <End Role="Teaches" Type="Self.Teaches" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="CourseID" />
-            </Principal>
-            <Dependent Role="Teaches">
-              <PropertyRef Name="CourseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Teaches_Instructor">
-          <End Role="Instructor" Type="Self.Instructor" Multiplicity="1" />
-          <End Role="Teaches" Type="Self.Teaches" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Instructor">
-              <PropertyRef Name="InstructorID" />
-            </Principal>
-            <Dependent Role="Teaches">
-              <PropertyRef Name="InstructorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserRole_Login">
           <End Role="Login" Type="Self.Login" Multiplicity="1" />
           <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
@@ -192,10 +181,6 @@
           <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teaches" EntityType="Self.Teaches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Note__author__14270015" Association="Self.FK__Note__author__14270015">
-            <End Role="Login" EntitySet="Login" />
-            <End Role="Note" EntitySet="Note" />
-          </AssociationSet>
           <AssociationSet Name="FK__Student__LoginId__06CD04F7" Association="Self.FK__Student__LoginId__06CD04F7">
             <End Role="Login" EntitySet="Login" />
             <End Role="Student" EntitySet="Student" />
@@ -204,6 +189,14 @@
             <End Role="Login" EntitySet="Login" />
             <End Role="Task" EntitySet="Task" />
           </AssociationSet>
+          <AssociationSet Name="FK__Teaches__CourseI__40F9A68C" Association="Self.FK__Teaches__CourseI__40F9A68C">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Teaches" EntitySet="Teaches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teaches__LoginID__40058253" Association="Self.FK__Teaches__LoginID__40058253">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Teaches" EntitySet="Teaches" />
+          </AssociationSet>
           <AssociationSet Name="FK_EnrollsIn_Course" Association="Self.FK_EnrollsIn_Course">
             <End Role="Course" EntitySet="Course" />
             <End Role="EnrollsIn" EntitySet="EnrollsIn" />
@@ -211,14 +204,6 @@
           <AssociationSet Name="FK_EnrollsIn_Login" Association="Self.FK_EnrollsIn_Login">
             <End Role="Login" EntitySet="Login" />
             <End Role="EnrollsIn" EntitySet="EnrollsIn" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Teaches_Course" Association="Self.FK_Teaches_Course">
-            <End Role="Course" EntitySet="Course" />
-            <End Role="Teaches" EntitySet="Teaches" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Teaches_Instructor" Association="Self.FK_Teaches_Instructor">
-            <End Role="Instructor" EntitySet="Instructor" />
-            <End Role="Teaches" EntitySet="Teaches" />
           </AssociationSet>
           <AssociationSet Name="FK_UserRole_Login" Association="Self.FK_UserRole_Login">
             <End Role="Login" EntitySet="Login" />
@@ -236,18 +221,18 @@
           <Property Name="CourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Teaches" Relationship="PortalModel.FK_Teaches_Course" FromRole="Course" ToRole="Teach" />
           <NavigationProperty Name="EnrollsIns" Relationship="PortalModel.FK_EnrollsIn_Course" FromRole="Course" ToRole="EnrollsIn" />
+          <NavigationProperty Name="Teaches" Relationship="PortalModel.FK__Teaches__CourseI__40F9A68C" FromRole="Course" ToRole="Teach" />
         </EntityType>
         <EntityType Name="Instructor">
           <Key>
             <PropertyRef Name="InstructorID" />
           </Key>
-          <Property Name="InstructorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Salary" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Teaches" Relationship="PortalModel.FK_Teaches_Instructor" FromRole="Instructor" ToRole="Teach" />
+          <Property Name="InstructorID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Fname" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="lname" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
+          <Property Name="Salary" Nullable="false" Type="Int32" />
+          <Property Name="LoginID" Type="Int32" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -262,6 +247,7 @@
           <NavigationProperty Name="Students" Relationship="PortalModel.FK__Student__LoginId__06CD04F7" FromRole="Login" ToRole="Student" />
           <NavigationProperty Name="Tasks" Relationship="PortalModel.FK__Task__StudentID__08B54D69" FromRole="Login" ToRole="Task" />
           <NavigationProperty Name="Notes" Relationship="PortalModel.FK__Note__author__14270015" FromRole="Login" ToRole="Note" />
+          <NavigationProperty Name="Teaches" Relationship="PortalModel.FK__Teaches__LoginID__40058253" FromRole="Login" ToRole="Teach" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -283,15 +269,6 @@
           <AssociationSet Name="FK_UserRole_Login" Association="PortalModel.FK_UserRole_Login">
             <End Role="Login" EntitySet="Logins" />
             <End Role="UserRole" EntitySet="UserRoles" />
-          </AssociationSet>
-          <EntitySet Name="Teaches" EntityType="PortalModel.Teach" />
-          <AssociationSet Name="FK_Teaches_Course" Association="PortalModel.FK_Teaches_Course">
-            <End Role="Course" EntitySet="Courses" />
-            <End Role="Teach" EntitySet="Teaches" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Teaches_Instructor" Association="PortalModel.FK_Teaches_Instructor">
-            <End Role="Instructor" EntitySet="Instructors" />
-            <End Role="Teach" EntitySet="Teaches" />
           </AssociationSet>
           <EntitySet Name="EnrollsIns" EntityType="PortalModel.EnrollsIn" />
           <AssociationSet Name="FK_EnrollsIn_Course" Association="PortalModel.FK_EnrollsIn_Course">
@@ -316,6 +293,15 @@
             <End Role="Login" EntitySet="Logins" />
             <End Role="Note" EntitySet="Notes" />
           </AssociationSet>
+          <EntitySet Name="Teaches" EntityType="PortalModel.Teach" />
+          <AssociationSet Name="FK__Teaches__CourseI__40F9A68C" Association="PortalModel.FK__Teaches__CourseI__40F9A68C">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Teach" EntitySet="Teaches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Teaches__LoginID__40058253" Association="PortalModel.FK__Teaches__LoginID__40058253">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="Teach" EntitySet="Teaches" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="UserRole">
           <Key>
@@ -335,40 +321,6 @@
             </Principal>
             <Dependent Role="UserRole">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Teach">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="InstructorID" Type="Int32" Nullable="false" />
-          <Property Name="CourseID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Course" Relationship="PortalModel.FK_Teaches_Course" FromRole="Teach" ToRole="Course" />
-          <NavigationProperty Name="Instructor" Relationship="PortalModel.FK_Teaches_Instructor" FromRole="Teach" ToRole="Instructor" />
-        </EntityType>
-        <Association Name="FK_Teaches_Course">
-          <End Type="PortalModel.Course" Role="Course" Multiplicity="1" />
-          <End Type="PortalModel.Teach" Role="Teach" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="CourseID" />
-            </Principal>
-            <Dependent Role="Teach">
-              <PropertyRef Name="CourseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Teaches_Instructor">
-          <End Type="PortalModel.Instructor" Role="Instructor" Multiplicity="1" />
-          <End Type="PortalModel.Teach" Role="Teach" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Instructor">
-              <PropertyRef Name="InstructorID" />
-            </Principal>
-            <Dependent Role="Teach">
-              <PropertyRef Name="InstructorID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -465,6 +417,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Teach">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoginID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="PortalModel.FK__Teaches__CourseI__40F9A68C" FromRole="Teach" ToRole="Course" />
+          <NavigationProperty Name="Login" Relationship="PortalModel.FK__Teaches__LoginID__40058253" FromRole="Teach" ToRole="Login" />
+        </EntityType>
+        <Association Name="FK__Teaches__CourseI__40F9A68C">
+          <End Type="PortalModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="PortalModel.Teach" Role="Teach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Teach">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Teaches__LoginID__40058253">
+          <End Type="PortalModel.Login" Role="Login" Multiplicity="1" />
+          <End Type="PortalModel.Teach" Role="Teach" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Teach">
+              <PropertyRef Name="LoginID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -483,6 +469,7 @@
           <EntitySetMapping Name="Instructors">
             <EntityTypeMapping TypeName="PortalModel.Instructor">
               <MappingFragment StoreEntitySet="Instructor">
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
                 <ScalarProperty Name="InstructorID" ColumnName="InstructorID" />
                 <ScalarProperty Name="Fname" ColumnName="Fname" />
                 <ScalarProperty Name="lname" ColumnName="lname" />
@@ -520,15 +507,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Teaches">
-            <EntityTypeMapping TypeName="PortalModel.Teach">
-              <MappingFragment StoreEntitySet="Teaches">
-                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
-                <ScalarProperty Name="InstructorID" ColumnName="InstructorID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="EnrollsIns">
             <EntityTypeMapping TypeName="PortalModel.EnrollsIn">
               <MappingFragment StoreEntitySet="EnrollsIn">
@@ -558,6 +536,15 @@
                 <ScalarProperty Name="content" ColumnName="content" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teaches">
+            <EntityTypeMapping TypeName="PortalModel.Teach">
+              <MappingFragment StoreEntitySet="Teaches">
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

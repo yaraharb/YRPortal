@@ -59,6 +59,34 @@ namespace YRPortal.Controllers
             }
             return View(courses);
         }
+        public ActionResult InstructorView()
+        {
+
+            List<Course> courses = new List<Course>();
+            using (SqlConnection con = new SqlConnection(StoreConnection.GetConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Course, Teaches WHERE Teaches.LoginID ='" + GlobalID.ID + "' AND Course.CourseID = Teaches.CourseID ", con))
+                {
+                    if (con.State != System.Data.ConnectionState.Open)
+                        con.Open();
+                    SqlDataReader sdr = cmd.ExecuteReader();
+                    DataTable dt = new DataTable();
+                    dt.Load(sdr);
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        courses.Add(
+                            new Course
+                            {
+                                Name = row["Name"].ToString(),
+                                Description = row["Description"].ToString()
+                            });
+                    }
+
+
+                }
+            }
+            return View(courses);
+        }
 
         // GET: Courses/Details/5
         public ActionResult Details(int? id)
@@ -76,7 +104,7 @@ namespace YRPortal.Controllers
         }
 
         // GET: Courses/Create
-        [Authorize(Roles = "admin")]
+
         public ActionResult Create()
         {
             return View();
@@ -87,7 +115,7 @@ namespace YRPortal.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+
         public ActionResult Create([Bind(Include = "CourseID,Name,Description")] Course course)
         {
             if (ModelState.IsValid)
@@ -235,7 +263,7 @@ namespace YRPortal.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        [Authorize(Roles = "admin, Student")]
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

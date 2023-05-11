@@ -14,7 +14,6 @@ using YRPortal.Models;
 
 namespace YRPortal.Controllers
 {
-    [Authorize(Roles ="admin")]
     public class LoginsController : Controller
     {
         private PortalEntities4 db = new PortalEntities4();
@@ -87,6 +86,7 @@ namespace YRPortal.Controllers
                         instructor.Fname = model.firstname;
                         instructor.lname = model.lastname;
                         instructor.Salary = int.Parse(model.description);
+                        instructor.LoginID = model.ID;
                         db.Instructors.Add(instructor);
 
                     }

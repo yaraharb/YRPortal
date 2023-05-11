@@ -5,10 +5,6 @@
 }
 
 <h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -16,6 +12,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.lname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salary)
         </th>
         <th></th>
     </tr>
@@ -30,10 +29,9 @@
                 @Html.DisplayFor(modelItem => item.lname)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.InstructorID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.InstructorID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.InstructorID })
+                @Html.DisplayFor(modelItem => item.Salary)
             </td>
+           
             <td>
                 <form action="/Instructors/AssignList" method="post">
                     <input type="hidden" name="id" value="@item.InstructorID" />

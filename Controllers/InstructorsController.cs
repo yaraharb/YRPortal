@@ -167,9 +167,9 @@ namespace YRPortal.Controllers
             {
                 con.Open();
 
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Teaches(InstructorID, CourseID) VALUES(@InstructorID, @CourseID)", con))
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO Teaches(LoginID, CourseID) VALUES(@LoginID, @CourseID)", con))
                 {
-                    cmd.Parameters.AddWithValue("@InstructorID", InstructorID);
+                    cmd.Parameters.AddWithValue("@LoginID", GlobalID.ID) ;
                     cmd.Parameters.AddWithValue("@CourseID", id);
                     cmd.ExecuteNonQuery();
                 }
