@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using YRPortal.Config;
 using YRPortal.Models;
 
 namespace YRPortal.Controllers
@@ -53,10 +55,11 @@ namespace YRPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,firstname,lastname,description, role")] CreateUser model)
         {
+            int idd = 1;
             using (var context = new PortalEntities4())
             {
                 Login user = new Login();
-                string username = model.firstname +"."+ model.lastname; 
+                string username = model.firstname + "." + model.lastname;
                 user.Username = username;
                 user.Password = username;
                 user.Role = model.role;
@@ -67,17 +70,33 @@ namespace YRPortal.Controllers
                     ViewBag.ErrorMessage = "Username already found";
                     return RedirectToAction("");
                 }
-
-                else if (!isFound && ModelState.IsValid && model.role == "Student" || model.role == "Instructor")
+                else if (!isFound && ModelState.IsValid && (model.role == "Student" || model.role == "Instructor"))
                 {
+                    db.Logins.Add(user);
+                    db.SaveChanges();
+                    using (SqlConnection con = new SqlConnection(StoreConnection.GetConnection()))
+                    {
+                        using (SqlCommand cmd = new SqlCommand("SELECT ID FROM Login WHERE username = '" + username + "' ; ", con))
+                        {
+                            if (con.State != System.Data.ConnectionState.Open)
+                                con.Open();
+                            SqlDataReader sdr = cmd.ExecuteReader();
+                            DataTable dt = new DataTable();
+                            dt.Load(sdr);
+                            foreach (DataRow row in dt.Rows)
+                                idd = int.Parse(row["ID"].ToString());
+                        }
+                    }
+
+                    
                     if (model.role == "Student")
                     {
                         Student student = new Student();
                         student.FName = model.firstname;
                         student.Lname = model.lastname;
                         student.Major = model.description;
-                        student.LoginId = model.ID;
-                        
+                        student.LoginId = idd;
+
                         db.Students.Add(student);
                     }
                     if (model.role == "Instructor")
@@ -86,19 +105,21 @@ namespace YRPortal.Controllers
                         instructor.Fname = model.firstname;
                         instructor.lname = model.lastname;
                         instructor.Salary = int.Parse(model.description);
-                        instructor.LoginID = model.ID;
+                        instructor.LoginID = idd;
+
                         db.Instructors.Add(instructor);
-
                     }
-                    db.Logins.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            return View(model);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                return View(model);
+            }
         }
 
-}
+
+
 
 
 

@@ -129,6 +129,12 @@ namespace YRPortal.Controllers
                 note.UploadFile.SaveAs(fileName);
                 note.author = GlobalID.ID;
 
+
+
+            
+
+
+
                 db.Notes.Add(note);
                 db.SaveChanges();
                 return RedirectToAction("../Notes/Index");

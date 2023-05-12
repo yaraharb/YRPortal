@@ -22,6 +22,8 @@
         <EntityTypeShape EntityType="PortalModel.Teach" Width="1.5" PointX="3" PointY="0.75" />
         <AssociationConnector Association="PortalModel.FK__Teaches__CourseI__40F9A68C" />
         <AssociationConnector Association="PortalModel.FK__Teaches__LoginID__40058253" />
+        <EntityTypeShape EntityType="PortalModel.material" Width="1.5" PointX="3" PointY="9.875" />
+        <AssociationConnector Association="PortalModel.FK__material__course__43D61337" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

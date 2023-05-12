@@ -40,6 +40,15 @@
           <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="material">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" />
+          <Property Name="content" Type="varchar(max)" />
+          <Property Name="courseID" Type="int" />
+        </EntityType>
         <EntityType Name="Note">
           <Key>
             <PropertyRef Name="id" />
@@ -87,6 +96,18 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK__material__course__43D61337">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="material" Type="Self.material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="material">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Student__LoginId__06CD04F7">
           <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
           <End Role="Student" Type="Self.Student" Multiplicity="*" />
@@ -176,11 +197,16 @@
           <EntitySet Name="EnrollsIn" EntityType="Self.EnrollsIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Instructor" EntityType="Self.Instructor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="material" EntityType="Self.material" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Note" EntityType="Self.Note" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teaches" EntityType="Self.Teaches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__material__course__43D61337" Association="Self.FK__material__course__43D61337">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="material" EntitySet="material" />
+          </AssociationSet>
           <AssociationSet Name="FK__Student__LoginId__06CD04F7" Association="Self.FK__Student__LoginId__06CD04F7">
             <End Role="Login" EntitySet="Login" />
             <End Role="Student" EntitySet="Student" />
@@ -223,6 +249,7 @@
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="EnrollsIns" Relationship="PortalModel.FK_EnrollsIn_Course" FromRole="Course" ToRole="EnrollsIn" />
           <NavigationProperty Name="Teaches" Relationship="PortalModel.FK__Teaches__CourseI__40F9A68C" FromRole="Course" ToRole="Teach" />
+          <NavigationProperty Name="materials" Relationship="PortalModel.FK__material__course__43D61337" FromRole="Course" ToRole="material" />
         </EntityType>
         <EntityType Name="Instructor">
           <Key>
@@ -301,6 +328,11 @@
           <AssociationSet Name="FK__Teaches__LoginID__40058253" Association="PortalModel.FK__Teaches__LoginID__40058253">
             <End Role="Login" EntitySet="Logins" />
             <End Role="Teach" EntitySet="Teaches" />
+          </AssociationSet>
+          <EntitySet Name="materials" EntityType="PortalModel.material" />
+          <AssociationSet Name="FK__material__course__43D61337" Association="PortalModel.FK__material__course__43D61337">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="material" EntitySet="materials" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="UserRole">
@@ -451,6 +483,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="material">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="courseID" Type="Int32" />
+          <NavigationProperty Name="Course" Relationship="PortalModel.FK__material__course__43D61337" FromRole="material" ToRole="Course" />
+        </EntityType>
+        <Association Name="FK__material__course__43D61337">
+          <End Type="PortalModel.Course" Role="Course" Multiplicity="0..1" />
+          <End Type="PortalModel.material" Role="material" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="material">
+              <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -544,6 +598,16 @@
               <MappingFragment StoreEntitySet="Teaches">
                 <ScalarProperty Name="CourseID" ColumnName="CourseID" />
                 <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="materials">
+            <EntityTypeMapping TypeName="PortalModel.material">
+              <MappingFragment StoreEntitySet="material">
+                <ScalarProperty Name="courseID" ColumnName="courseID" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
