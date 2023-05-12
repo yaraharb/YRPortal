@@ -4,7 +4,7 @@
     ViewBag.Title = "InstructorView";
 }
 
-
+<h2> My Dashboard</h2>
 <table class="table">
     <tr>
         <th>
@@ -25,9 +25,8 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CourseID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CourseID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CourseID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.CourseID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.CourseID }, new { style = "color: red" })
         </td>
     </tr>
 }

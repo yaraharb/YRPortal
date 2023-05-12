@@ -15,30 +15,30 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th>
-            Register
-        </th>
         <th></th>
+
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            <form action="/Courses/EnrollIn" method="post">
-                <input type="hidden" name="id" value="@item.CourseID" />
-                <button type="submit" class="btn btn-primary">Enroll in</button>
-            </form>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <form action="/Courses/EnrollIn" method="post">
+                    <input type="hidden" name="id" value="@item.CourseID" />
+                    <button type="submit" class="btn btn-primary" style=" background-color: #193441;">Enroll in</button>
+                </form>
+            </td>
+        </tr>
+    }
 
 </table>
+
 <div>
-    @Html.ActionLink("Back to List", "StudentView", "Courses")
+    <a href="/Courses/StudentView" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">Back</a>
 </div>
