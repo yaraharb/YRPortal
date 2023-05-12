@@ -108,6 +108,11 @@
     .col-lg-12 {
         width: 100%;
     }
+    .my-class {
+        width: 32.5% !important;
+        font-size: 14px;
+        text-align: center;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -166,6 +171,11 @@
         margin-left: 30%;
         margin-top: 5%;
         margin-bottom: 5%;
+    }
+    .my-class {
+        width: 43.5% !important;
+        font-size: 14px;
+        text-align: center;
     }
 }
 
@@ -228,6 +238,11 @@
         margin-left: 20%;
         margin-top: 5%;
         margin-bottom: 5%;
+    }
+    .my-class {
+        width: 34.5% !important;
+        font-size: 14px;
+        text-align: center;
     }
 }
 
@@ -294,6 +309,12 @@
     .tomove {
         margin-left: 5%;
         margin-top: 5%;
+
         margin-bottom: 5%;
+    }
+    .my-class {
+        width: 59.5% !important;
+        font-size: 14px;
+        text-align: center;
     }
 }

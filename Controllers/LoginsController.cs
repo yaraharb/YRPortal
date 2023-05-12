@@ -101,8 +101,6 @@ namespace YRPortal.Controllers
 }
 
 
-
-
         // GET: Logins/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {

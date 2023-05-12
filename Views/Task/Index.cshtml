@@ -5,20 +5,20 @@
 }
 
 <h2>My Tasks</h2>
+<div>
+    <a href="/Task/Create" type="button" class="btn btn-primary" style=" background-color: #193441; margin-bottom: 1%;}">Create a new task</a>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.title)
+            Title
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.content)
+            Content
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.deadline)
+            Deadline
         </th>
         <th></th>
     </tr>
@@ -38,12 +38,12 @@
 
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                @Html.ActionLink("Delete", "Delete", new { id = item.id }, new {style ="color: red;"})
             </td>
         </tr>
     }
 
 </table>
 <div>
-    @Html.ActionLink("Back to List", "StudentView", "Courses")
+    <a href="/Courses/StudentView" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">Back</a>
 </div>
