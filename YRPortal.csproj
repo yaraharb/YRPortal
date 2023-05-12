@@ -167,6 +167,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorsController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
+    <Compile Include="Controllers\materialsController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
@@ -185,6 +186,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Login.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\material.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Membership.cs" />
@@ -318,9 +322,15 @@
     <Content Include="Views\Notes\Edit.cshtml" />
     <Content Include="Views\Notes\Index.cshtml" />
     <Content Include="Views\Courses\InstructorView.cshtml" />
+    <Content Include="Views\materials\Create.cshtml" />
+    <Content Include="Views\materials\Delete.cshtml" />
+    <Content Include="Views\materials\Details.cshtml" />
+    <Content Include="Views\materials\Edit.cshtml" />
+    <Content Include="Views\materials\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="materials\" />
     <Folder Include="notes\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
