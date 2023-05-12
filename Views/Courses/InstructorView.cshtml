@@ -4,7 +4,7 @@
     ViewBag.Title = "InstructorView";
 }
 
-
+<h2> My Dashboard</h2>
 <table class="table">
     <tr>
         <th>
@@ -24,8 +24,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.CourseID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.CourseID }, new { style = "color: red" })
+        </td>
     </tr>
 }
 
 </table>
-<a href="~/materials/Index" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">View Tasks</a>

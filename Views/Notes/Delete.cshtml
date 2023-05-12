@@ -10,35 +10,35 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        <dt style="margin-bottom: 1%">
             Title
         </dt>
 
-        <dd>
+        <dd style="margin-bottom: 1%">
             @Html.DisplayFor(model => model.title)
         </dd>
 
-        <dt>
+        <dt style="margin-bottom: 1%">
             Content
         </dt>
 
-        <dd>
+        <dd style="margin-bottom: 1%">
             @Html.DisplayFor(model => model.content)
         </dd>
 
-        <dt>
+        <dt style="margin-bottom: 1%">
             Status
         </dt>
 
-        <dd>
+        <dd style="margin-bottom: 1%">
             @Html.DisplayFor(model => model.status)
         </dd>
 
-        <dt>
+        <dt style="margin-bottom: 1%">
             Course Name
         </dt>
 
-        <dd>
+        <dd style="margin-bottom: 1%">
             @Html.DisplayFor(model => model.courseName)
         </dd>
     </dl>
@@ -47,12 +47,9 @@
     {
         @Html.AntiForgeryToken()
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" style="background-color: #de1a04; color: white;" />
-            <a href="/Logins/Index" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">Back</a>
-        </div>
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" style="color: white; background-color: #193441" /> |
-            @Html.ActionLink("Back to List", "../Notes/Index")
+            <a href="../Notes/Index" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">Back</a>
+            <input type="submit" value="Delete" class="btn btn-default" style="background-color: #e81405; color: white; position: relative; float: right; margin-top: 2%; margin-right: 1%;" />
+
         </div>
     }
 </div>
