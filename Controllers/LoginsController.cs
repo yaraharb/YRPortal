@@ -125,22 +125,18 @@ namespace YRPortal.Controllers
 
 
         // GET: Logins/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public ActionResult Edit(int? id)
         {
-            var handler = new HttpClientHandler()
+            if (id == null)
             {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-            };
-            var client = new HttpClient(handler);
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://api.usbeefme.com.192-185-6-199.hgws3.hgwin.temp.domains/api/Recipes/GetRecipes");
-            request.Headers.Add("Authorization", "Bearer TBoLIS0frPn51cLUleenUnkldKIBpQVRvgWs6BZjbQeTQbpjxvhZqkkJQm4hpfytNg_gnvhCe7nPDoSU7vLItA6EyMzIb1D0deJuGLTfR0QeIfqW-LrB_dKc6tLqhvPLPvti_buJVn68tu1foONznVvlbSk4rR09IlE1l-LDS5w6YK19sofDcHuGvz-GWFtxiIKxb84s8lFishISwJt3gG5SRJ1EGuBsvqsnU9U5EDG-TGKKzhLUQGwR4TX8i5sCheibep4AmaHzvlTKwPADJMnZbTUjvE9643YBgyub4XG0YImsVdTajZ0ihQCtzyuWDi-5cmFp4P1uXTEhqeS6TJkUdBYrhAqCPImSGVd-yuZJE06QylrJL36f-hKgb9WDOhxVaFqgjLUbh7Y3yNdZsDzvbTQDgaf2LZSYdzozfqSxDbGjNDWY007iRSZWEbW4Jjfx9odGt-o62Qhg3LcuLPNqWYaf0uMSYZRcv7NS29bhubAvWZfuxahVHEco5Zo8NTX9IA");
-            var content = new StringContent("{\r\n  \"offset\": 1,\r\n  \"pageSize\": 10,\r\n  \"categoryID\": \"3\",\r\n}", null, "application/json");
-            request.Content = content;
-            var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            Console.WriteLine(await response.Content.ReadAsStringAsync());
-
-            return View();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Login login = db.Logins.Find(id);
+            if (login == null)
+            {
+                return HttpNotFound();
+            }
+            return View(login);
         }
 
         // POST: Logins/Edit/5
@@ -150,13 +146,11 @@ namespace YRPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Username,Password,Role")] Login login)
         {
-            if (ModelState.IsValid)
-            {
+
                 db.Entry(login).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            return View(login);
+            
         }
 
         // GET: Logins/Delete/5
