@@ -45,15 +45,15 @@ img.logo {
   border-radius: 50%;
 }
 
-
 .card {
+    background-color: #f0f3fa;
     display: inline-block;
     width: 300px;
     margin: 20px;
     padding: 20px;
     border: 1px solid #3c6173;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.7);
 }
 
     .card h3 {
@@ -67,13 +67,13 @@ img.logo {
     }
 
 .buttonText {
-    padding-left: 25%;
+    padding-left: 18%;
 }
 
 .card a {
     display: inline-block;
     padding: 8px 16px;
-    border: 1px solid #ccc;
+    border: 1px solid #193441;
     border-radius: 3px;
     color: #333;
     text-decoration: none;

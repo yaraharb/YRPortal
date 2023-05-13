@@ -22,7 +22,10 @@ namespace YRPortal.Controllers
         {
             return View(db.Instructors.ToList());
         }
-
+        public ActionResult changePassword()
+        {
+            return View();
+        }
         // GET: Instructors/Details/5
         public ActionResult Details(int? id)
         {

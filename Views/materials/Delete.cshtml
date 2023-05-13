@@ -12,7 +12,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.title)
+            Title
         </dt>
 
         <dd>
@@ -20,15 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Course.Name)
+           Course Name
         </dt>
 
         <dd>
@@ -37,12 +29,14 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "../materials/Index")
+            <a href="/materials/Index" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">Back</a>
+            <input type="submit" value="Delete" class="btn btn-default" style="background-color: #e81405; color: white; position: relative; float: right; margin-top: 2%; margin-right: 1%;" />
+
         </div>
     }
 </div>

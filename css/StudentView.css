@@ -2,11 +2,47 @@
     background-color: #193441;
     position: relative;
     float: right;
-    margin-bottom: 1%;
 }
 .enrollbtn {
     background-color: #193441;
     position: relative;
     float: left;
-    margin-bottom: 1%
+
+}
+.sideMenu{
+    height: 100%;
+    width: 12%;
+    min-width: 150px;
+    background-color: #193441;
+    left: 0% !important;
+    position: fixed ;
+    opacity: 1.5;
+}
+
+.list {
+    margin-top: 35%;
+    padding-left: 0% !important;
+}
+
+    .list li {
+        position: center;
+        border-bottom: 1px solid white;
+        padding: 0%;
+        text-align:center;
+    }
+
+        .list li a {
+            display: block;     
+            padding: 10px;
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .list li a:hover{
+            color: lightgray;
+        }
+
+
+.row{
+ 
 }

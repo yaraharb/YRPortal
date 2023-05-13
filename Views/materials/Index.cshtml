@@ -4,40 +4,41 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Course Materials</h2>
+<div>
+    <a href="/materials/Create" type="button" class="btn btn-primary" style=" background-color: #193441; margin-bottom: 1%;}">Upload material</a>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.title)
+            Title
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.content)
+            Content
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.courseName)
+            Course Name
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.title)
-        </td>
-        <td>
-            <a href="@Url.Action("DisplayFile", "materials", new { filePath = item.content })">Download File</a>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.courseName)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                <a href="@Url.Action("DisplayFile", "materials", new { filePath = item.content })">Download File</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.courseName)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { style = "color: red;" })
+            </td>
+        </tr>
+    }
 
 </table>
