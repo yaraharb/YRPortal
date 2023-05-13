@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography.Pkcs;
@@ -272,5 +273,48 @@ namespace YRPortal.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult material(int id)
+        {
+
+            List<material> materials = new List<material>();
+            using (SqlConnection con = new SqlConnection(StoreConnection.GetConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT m.ID, m.title, m.content, c.Name FROM Material m INNER JOIN Course c ON m.courseID = c.CourseID INNER JOIN EnrollsIn t ON c.CourseID = t.CourseID WHERE t.LoginID = '" + GlobalID.ID + "'", con))
+                {
+                    if (con.State != System.Data.ConnectionState.Open)
+                        con.Open();
+                    SqlDataReader sdr = cmd.ExecuteReader();
+                    DataTable dt = new DataTable();
+                    dt.Load(sdr);
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        materials.Add(
+                            new material
+                            {
+                                ID = (int)row["ID"],
+                                title = row["title"].ToString(),
+                                content = row["content"].ToString(),
+                                courseName = row["Name"].ToString()
+                            });
+                    }
+
+
+                }
+            }
+            return View(materials);
+        }
+        public ActionResult DisplayFile(string filePath)
+        {
+            // Create a file stream from the file path
+            FileStream fileStream = new FileStream(filePath, FileMode.Open);
+
+            // Extract the file name from the file path
+            string fileName = Path.GetFileName(filePath);
+
+            // Return the file as a FileStreamResult, providing appropriate content type
+            return File(fileStream, "application/octet-stream", fileName);
+        }
+    
     }
 }

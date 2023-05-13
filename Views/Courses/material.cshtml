@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<YRPortal.Models.material>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "material";
 }
 
-<h2>Index</h2>
+<h2>material</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -34,9 +31,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.courseName)
         </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
+        
     </tr>
 }
 

@@ -18,6 +18,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
+        <th>
+            Course Material
+        </th>
         <th></th>
     </tr>
 
@@ -31,7 +34,10 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Drop", "Delete", new { id = item.CourseID }, new { style= "color: red;" })
+                @Html.ActionLink("View", "material", new { id = item.CourseID }, new { style = "color: orange;" })
+            </td>
+            <td>
+                @Html.ActionLink("Drop", "Delete", new { id = item.CourseID }, new { style = "color: red;" })
             </td>
         </tr>
     }

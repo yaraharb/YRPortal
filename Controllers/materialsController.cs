@@ -23,11 +23,13 @@ namespace YRPortal.Controllers
             List<material> materials = new List<material>();
             using (SqlConnection con = new SqlConnection(StoreConnection.GetConnection()))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Material WHERE courseID IN (SELECT c.CourseID FROM Course c INNER JOIN Teaches e ON c.CourseID = e.CourseID INNER JOIN Login s ON e.LoginID = s.ID WHERE s.ID = '" + GlobalID.ID + "')", con))
+                using (SqlCommand cmd = new SqlCommand("SELECT m.ID, m.title, m.content, c.Name FROM Material m INNER JOIN Course c ON m.courseID = c.CourseID INNER JOIN Teaches t ON c.CourseID = t.CourseID WHERE t.LoginID = '" + GlobalID.ID + "'", con))
+
 
                 {
                     if (con.State != System.Data.ConnectionState.Open)
                         con.Open();
+
                     SqlDataReader sdr = cmd.ExecuteReader();
                     DataTable dt = new DataTable();
                     dt.Load(sdr);
@@ -36,8 +38,10 @@ namespace YRPortal.Controllers
                         materials.Add(
                             new material
                             {
+                                ID = (int)row["ID"],
                                 title = row["title"].ToString(),
                                 content = row["content"].ToString(),
+                                courseName = row["Name"].ToString()
                             });
                     }
 
@@ -47,6 +51,8 @@ namespace YRPortal.Controllers
 
             return View(materials);
         }
+
+
         public ActionResult DisplayFile(string filePath)
         {
             // Create a file stream from the file path
@@ -203,7 +209,7 @@ namespace YRPortal.Controllers
             material material = db.materials.Find(id);
             db.materials.Remove(material);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("../materials/Index");
         }
 
         protected override void Dispose(bool disposing)

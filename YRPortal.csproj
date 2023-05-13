@@ -327,6 +327,7 @@
     <Content Include="Views\materials\Details.cshtml" />
     <Content Include="Views\materials\Edit.cshtml" />
     <Content Include="Views\materials\Index.cshtml" />
+    <Content Include="Views\Courses\material.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
