@@ -11,12 +11,14 @@ namespace YRPortal.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Task
     {
         public int id { get; set; }
         public string title { get; set; }
         public string content { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime deadline { get; set; }
         public Nullable<int> StudentID { get; set; }
     
