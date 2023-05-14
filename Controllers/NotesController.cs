@@ -81,10 +81,6 @@ namespace YRPortal.Controllers
         // GET: Notes/Create
         public ActionResult Create()
         {
-
-
-
-
             List<String> names = new List<String>();
             using (SqlConnection con = new SqlConnection(StoreConnection.GetConnection()))
             {
@@ -105,7 +101,6 @@ namespace YRPortal.Controllers
             }
 
             ViewBag.courseName = new SelectList(names);
-            ViewBag.author = new SelectList(db.Logins, "ID", "Username");
             return View();
         }
 

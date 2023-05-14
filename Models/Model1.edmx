@@ -60,6 +60,18 @@
           <Property Name="author" Type="int" Nullable="false" />
           <Property Name="courseName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseID" Type="int" />
+          <Property Name="StudentID" Type="int" />
+          <Property Name="Explanation" Type="int" />
+          <Property Name="Content" Type="int" />
+          <Property Name="Relevance" Type="int" />
+          <Property Name="Comment" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="StudentId" />
@@ -105,6 +117,18 @@
             </Principal>
             <Dependent Role="material">
               <PropertyRef Name="courseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Review__CourseID__55F4C372">
+          <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="CourseID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -199,6 +223,7 @@
           <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="material" EntityType="Self.material" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Note" EntityType="Self.Note" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teaches" EntityType="Self.Teaches" Schema="dbo" store:Type="Tables" />
@@ -206,6 +231,10 @@
           <AssociationSet Name="FK__material__course__43D61337" Association="Self.FK__material__course__43D61337">
             <End Role="Course" EntitySet="Course" />
             <End Role="material" EntitySet="material" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Review__CourseID__55F4C372" Association="Self.FK__Review__CourseID__55F4C372">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Review" EntitySet="Review" />
           </AssociationSet>
           <AssociationSet Name="FK__Student__LoginId__06CD04F7" Association="Self.FK__Student__LoginId__06CD04F7">
             <End Role="Login" EntitySet="Login" />
@@ -250,6 +279,7 @@
           <NavigationProperty Name="EnrollsIns" Relationship="PortalModel.FK_EnrollsIn_Course" FromRole="Course" ToRole="EnrollsIn" />
           <NavigationProperty Name="Teaches" Relationship="PortalModel.FK__Teaches__CourseI__40F9A68C" FromRole="Course" ToRole="Teach" />
           <NavigationProperty Name="materials" Relationship="PortalModel.FK__material__course__43D61337" FromRole="Course" ToRole="material" />
+          <NavigationProperty Name="Reviews" Relationship="PortalModel.FK__Review__CourseID__55F4C372" FromRole="Course" ToRole="Review" />
         </EntityType>
         <EntityType Name="Instructor">
           <Key>
@@ -333,6 +363,11 @@
           <AssociationSet Name="FK__material__course__43D61337" Association="PortalModel.FK__material__course__43D61337">
             <End Role="Course" EntitySet="Courses" />
             <End Role="material" EntitySet="materials" />
+          </AssociationSet>
+          <EntitySet Name="Reviews" EntityType="PortalModel.Review" />
+          <AssociationSet Name="FK__Review__CourseID__55F4C372" Association="PortalModel.FK__Review__CourseID__55F4C372">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Review" EntitySet="Reviews" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="UserRole">
@@ -505,6 +540,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseID" Type="Int32" />
+          <Property Name="StudentID" Type="Int32" />
+          <Property Name="Explanation" Type="Int32" />
+          <Property Name="Content" Type="Int32" />
+          <Property Name="Relevance" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Course" Relationship="PortalModel.FK__Review__CourseID__55F4C372" FromRole="Review" ToRole="Course" />
+        </EntityType>
+        <Association Name="FK__Review__CourseID__55F4C372">
+          <End Type="PortalModel.Course" Role="Course" Multiplicity="0..1" />
+          <End Type="PortalModel.Review" Role="Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -608,6 +668,19 @@
                 <ScalarProperty Name="courseID" ColumnName="courseID" />
                 <ScalarProperty Name="content" ColumnName="content" />
                 <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="PortalModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Relevance" ColumnName="Relevance" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Explanation" ColumnName="Explanation" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
