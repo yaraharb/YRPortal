@@ -144,8 +144,7 @@ namespace YRPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Username,Password,Role")] Login login)
         {
-
-                db.Entry(login).State = EntityState.Modified;
+            db.Entry(login).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             
@@ -171,6 +170,50 @@ namespace YRPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var note = db.Notes.Where(n => n.author == id);
+            if (note != null)
+            {
+                db.Notes.RemoveRange(note);
+            }
+
+            var task = db.Tasks.Where(n => n.StudentID == id);
+            if (task != null)
+            {
+                db.Tasks.RemoveRange(task);
+            }
+            var e = db.EnrollsIns.Where(n => n.LoginID == id);
+            if (e != null)
+            {
+                db.EnrollsIns.RemoveRange(e);
+            }
+
+
+            var t = db.Teaches.Where(n => n.LoginID == id);
+            if (t != null)
+            {
+                db.Teaches.RemoveRange(t);
+            }
+            var student = db.Students.Where(n => n.LoginId == id);
+            if (student != null)
+            {
+                db.Students.RemoveRange(student);
+            }
+
+
+            var instructor = db.Instructors.Where(n => n.LoginID == id);
+            if (instructor != null)
+            {
+                db.Instructors.RemoveRange(instructor);
+            }
+
+            var role = db.UserRoles.Where(n => n.UserId == id);
+            if(role != null) 
+            {
+                db.UserRoles.RemoveRange(role);
+            }
+
+            
+
             Login login = db.Logins.Find(id);
             db.Logins.Remove(login);
             db.SaveChanges();

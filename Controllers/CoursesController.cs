@@ -50,9 +50,10 @@ namespace YRPortal.Controllers
                         courses.Add(
                             new Course
                             {
+                                CourseID = (int)row["CourseID"],
                                 Name = row["Name"].ToString(),
                                 Description = row["Description"].ToString()
-                            });
+                            });;
                     }
 
 
@@ -259,7 +260,35 @@ namespace YRPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Course course = db.Courses.Find(id + 1);
+            Course course = db.Courses.Find(id);
+
+
+            var notes = db.Notes.Where(n => n.courseName == id.ToString());
+            if (notes != null)
+            {
+                db.Notes.RemoveRange(notes);
+            }
+            var reviews = db.Reviews.Where(r => r.CourseID == id);
+            if (reviews != null)
+            {
+                db.Reviews.RemoveRange(reviews);
+            }
+
+            var enrolls = db.EnrollsIns.Where(e => e.CourseID == id);
+            if (enrolls != null)
+            {
+                db.EnrollsIns.RemoveRange(enrolls);
+            }
+            var teaches = db.Teaches.Where(t => t.CourseID == id);
+            if (teaches != null)
+            {
+                db.Teaches.RemoveRange(teaches);
+            }
+            var materials = db.materials.Where(m => m.courseID == id);
+            if (materials == null)
+            {
+                db.materials.RemoveRange(materials);
+            }
             db.Courses.Remove(course);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -303,6 +332,17 @@ namespace YRPortal.Controllers
                 }
             }
             return View(materials);
+        }
+
+        public ActionResult Drop(int id) {
+            var enrolls = db.EnrollsIns.Where(e => e.CourseID == id);
+            if (enrolls != null)
+            {
+                db.EnrollsIns.RemoveRange(enrolls);
+            }
+            db.SaveChanges();
+            return RedirectToAction("../Courses/StudentView");
+
         }
         public ActionResult DisplayFile(string filePath)
         {
