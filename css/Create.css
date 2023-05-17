@@ -44,9 +44,7 @@ input[type="password"] {
     text-align: center;
     border-radius: 1px 1px 1px 1px;
 }*/
-.input-group-addon {
-   
-}
+
 /* Style the radio buttons */
 input[type="radio"] {
     margin-right: 10px;

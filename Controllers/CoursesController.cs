@@ -243,11 +243,11 @@ namespace YRPortal.Controllers
 
         public ActionResult Delete(int? id)
         {
-            if (id+1 == null)
+            if (id  == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id+1);
+            Course course = db.Courses.Find(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -267,28 +267,35 @@ namespace YRPortal.Controllers
             if (notes != null)
             {
                 db.Notes.RemoveRange(notes);
+                db.SaveChanges();
             }
             var reviews = db.Reviews.Where(r => r.CourseID == id);
             if (reviews != null)
             {
                 db.Reviews.RemoveRange(reviews);
+                db.SaveChanges();
             }
 
             var enrolls = db.EnrollsIns.Where(e => e.CourseID == id);
             if (enrolls != null)
             {
                 db.EnrollsIns.RemoveRange(enrolls);
+                db.SaveChanges();
             }
             var teaches = db.Teaches.Where(t => t.CourseID == id);
             if (teaches != null)
             {
                 db.Teaches.RemoveRange(teaches);
+                db.SaveChanges();
             }
+
             var materials = db.materials.Where(m => m.courseID == id);
-            if (materials == null)
+            if (materials != null)
             {
                 db.materials.RemoveRange(materials);
+                db.SaveChanges();
             }
+            db.SaveChanges();
             db.Courses.Remove(course);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -302,7 +309,6 @@ namespace YRPortal.Controllers
             }
             base.Dispose(disposing);
         }
-
         public ActionResult material(int id)
         {
 
