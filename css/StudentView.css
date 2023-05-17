@@ -12,7 +12,7 @@
 .sideMenu{
     height: 100%;
     width: 12%;
-    min-width: 150px;
+    min-width: 195px;
     background-color: #193441;
     left: 0% !important;
     position: fixed ;
@@ -70,11 +70,6 @@
 @media only screen and (max-width: 1466px) {
     /* Hide the side menu */
     .sideMenu {
-        display: none;
+        z-index: 2;
     }
 
-    /* Show the button */
-    .menu-button {
-        display: block;
-    }
-}
