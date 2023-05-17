@@ -42,7 +42,39 @@
             color: lightgray;
         }
 
+/* Styling for the button */
+.menu-button {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
 
-.row{
- 
+/* Styling for the arrow icon */
+.menu-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-right: 10px;
+}
+
+/* Media query for screens smaller than 1466px */
+@media only screen and (max-width: 1466px) {
+    /* Hide the side menu */
+    .sideMenu {
+        display: none;
+    }
+
+    /* Show the button */
+    .menu-button {
+        display: block;
+    }
 }
