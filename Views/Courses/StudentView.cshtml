@@ -7,6 +7,10 @@
 <link href="@Url.Content("~/css/StudentView.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/css/loginPage.css")" rel="stylesheet" type="text/css" />
 
+<button id="menu-btn">
+    <i class="fas fa-bars"></i>
+</button>
+
 <div class="sideMenu">
     <h3 style="color: white; text-align: center;">My Dashboard</h3>
     <ul class="list">
@@ -16,9 +20,13 @@
         <li><a href="~/Students/changePassword">Change Password</a></li>
     </ul>
 </div>
+<button class="menu-button" onclick="document.querySelector('.sideMenu').style.display='block'">
+    <span class="menu-icon"></span>Show Menu
+</button>
+
 <h2 style="margin-left: 2%; margin-top: 7%;">Courses</h2>
 <div class="row">
-    
+
 </div>
 
 <div class="row menu">

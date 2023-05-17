@@ -4,20 +4,19 @@
     ViewBag.Title = "material";
 }
 
-<h2>material</h2>
+<h2>Course Material</h2>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.title)
+           Title
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.content)
+            Content
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.courseName)
+            Course Name 
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
