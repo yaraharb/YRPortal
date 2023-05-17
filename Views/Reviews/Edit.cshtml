@@ -3,47 +3,61 @@
 @{
     ViewBag.Title = "Edit";
 }
+<link href="@Url.Content("~/css/Create.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/css/media.css")" rel="stylesheet" type="text/css" />
 
-<h2>Edit</h2>
+<h2>Edit review</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Review</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CourseID, "CourseID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CourseID, "Course Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CourseID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("CourseID", null, htmlAttributes: new { @class = "form-control drop" })
                 @Html.ValidationMessageFor(model => model.CourseID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.StudentID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StudentID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StudentID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Explanation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Explanation, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="star-rating">
+                    <input type="radio" id="explanation-5" name="explanation" value="5" />
+                    <label for="explanation-5" title="5 stars"></label>
+                    <input type="radio" id="explanation-4" name="explanation" value="4" />
+                    <label for="explanation-4" title="4 stars"></label>
+                    <input type="radio" id="explanation-3" name="explanation" value="3" />
+                    <label for="explanation-3" title="3 stars"></label>
+                    <input type="radio" id="explanation-2" name="explanation" value="2" />
+                    <label for="explanation-2" title="2 stars"></label>
+                    <input type="radio" id="explanation-1" name="explanation" value="1" />
+                    <label for="explanation-1" title="1 star"></label>
+                </div>
                 @Html.ValidationMessageFor(model => model.Explanation, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="star-rating">
+                    <input type="radio" id="content-5" name="content" value="5" />
+                    <label for="content-5" title="5 stars"></label>
+                    <input type="radio" id="content-4" name="content" value="4" />
+                    <label for="content-4" title="4 stars"></label>
+                    <input type="radio" id="content-3" name="content" value="3" />
+                    <label for="content-3" title="3 stars"></label>
+                    <input type="radio" id="content-2" name="content" value="2" />
+                    <label for="content-2" title="2 stars"></label>
+                    <input type="radio" id="content-1" name="content" value="1" />
+                    <label for="content-1" title="1 star"></label>
+                </div>
                 @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,7 +65,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Relevance, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Relevance, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="star-rating">
+                    <input type="radio" id="relevance-5" name="relevance" value="5" />
+                    <label for="relevance-5" title="5 stars"></label>
+                    <input type="radio" id="relevance-4" name="relevance" value="4" />
+                    <label for="relevance-4" title="4 stars"></label>
+                    <input type="radio" id="relevance-3" name="relevance" value="3" />
+                    <label for="relevance-3" title="3 stars"></label>
+                    <input type="radio" id="relevance-2" name="relevance" value="2" />
+                    <label for="relevance-2" title="2 stars"></label>
+                    <input type="radio" id="relevance-1" name="relevance" value="1" />
+                    <label for="relevance-1" title="1 star"></label>
+                </div>
                 @Html.ValidationMessageFor(model => model.Relevance, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -63,15 +88,14 @@
                 @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    </div><div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
+
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="/Courses/StudentView" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">Back</a>
 </div>
