@@ -17,9 +17,9 @@ namespace YRPortal.Models
         public int ID { get; set; }
         public Nullable<int> CourseID { get; set; }
         public Nullable<int> StudentID { get; set; }
-        public Nullable<int> Explanation { get; set; }
-        public Nullable<int> Content { get; set; }
-        public Nullable<int> Relevance { get; set; }
+        public Nullable<int> Explanation { get; set; } = 0;
+        public Nullable<int> Content { get; set; } = 0;
+        public Nullable<int> Relevance { get; set; } = 0;
         public string Comment { get; set; }
         
         public string CourseName { get; set; }
