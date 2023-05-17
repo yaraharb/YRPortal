@@ -79,11 +79,11 @@ namespace YRPortal.Controllers
                     }
                 }
                 else { 
-                ModelState.AddModelError("", "Invalid username and password");
+                ModelState.AddModelError("", "Invalid username Or password");
                 }
                 
             }
-            return View();
+            return View(model1);
         }
 
         public ActionResult Signup()

@@ -11,6 +11,7 @@
 {
     @Html.AntiForgeryToken()
 
+
     <div class="imageContainer">
         <img src="/images/Logo - BrainBoost.png" alt="Logo" class="logo">
     </div>
@@ -38,7 +39,7 @@
                     </div>
                 </div>
             </div>
-
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 <div>
                     <input type="submit" value="Login" class="loginButton" />

@@ -22,10 +22,6 @@ namespace YRPortal.Controllers
         {
             return View(db.Instructors.ToList());
         }
-        public ActionResult changePassword()
-        {
-            return View();
-        }
         // GET: Instructors/Details/5
         public ActionResult Details(int? id)
         {
@@ -230,6 +226,26 @@ namespace YRPortal.Controllers
                 Courses.RemoveAll(c => c.CourseID == courseId);
             }
             return View(Courses);
+        }
+        public ActionResult changePassword()
+        {
+            Login login = db.Logins.Find(GlobalID.ID);
+            if (login == null)
+            {
+                return HttpNotFound();
+            }
+            return View(login);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword([Bind(Include = "ID,Username,Password,Role")] Login login)
+        {
+
+            db.Entry(login).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("../Courses/InstructorView");
+
         }
     }
 }
