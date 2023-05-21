@@ -6,7 +6,7 @@
 
 <h2>Create a new course</h2>
 
-<link href="@Url.Content("~/css/CreateNewUser.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/css/Create.css")" rel="stylesheet" type="text/css" />
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -39,9 +39,8 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="/Courses/Index" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">Back</a>
 </div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

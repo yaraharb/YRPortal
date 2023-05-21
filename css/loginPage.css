@@ -4,11 +4,13 @@ form {
   width: 100% !important;
   margin: 5% auto auto auto;
 }
+
 .boxes {
-    margin-left: 35%;
+    margin-left: 37%;
     margin-top: 5%;
     margin-bottom: 5%;
 }
+
 input[type=text], input[type=password] {
     padding: 12px 20px;
     border: 1px solid #193441;
@@ -43,7 +45,54 @@ img.logo {
   border-radius: 50%;
 }
 
+.card {
+    background-color: #f0f3fa;
+    display: inline-block;
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #3c6173;
+    border-radius: 5px;
+    box-shadow: 10px 5px 10px rgba(0, 0, 0, 0.7);
+}
 
+    .card h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
 
+    .card div {
+        font-size: 14px;
+        line-height: 1.5;
+    }
 
+.buttonText {
+    padding-left: 18%;
+}
 
+.card a {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #193441;
+    border-radius: 3px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+    .card a:hover {
+        background-color: #ddd;
+    }
+
+.btn-primary {
+    background-color: #193441;
+    margin-bottom: 2%;
+    
+}
+.bottombtn {
+    position: relative;
+    float: right;
+    margin-top: 5%;
+    margin-right: 1%;
+}

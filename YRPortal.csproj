@@ -167,7 +167,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorsController.cs" />
     <Compile Include="Controllers\LoginsController.cs" />
+    <Compile Include="Controllers\materialsController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
+    <Compile Include="Controllers\ReviewsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
@@ -187,6 +189,9 @@
     <Compile Include="Models\Login.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\material.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Membership.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -204,6 +209,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Note.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Review.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
@@ -227,9 +235,11 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="css\courseEdit.css" />
-    <Content Include="css\CreateNewUser.css" />
+    <Content Include="css\Create.css" />
     <Content Include="css\loginPage.css" />
     <Content Include="css\loginPageCard.css" />
+    <Content Include="css\media.css" />
+    <Content Include="css\StudentView.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -283,7 +293,6 @@
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Index.cshtml" />
     <Content Include="Views\Accounts\Login.cshtml" />
-    <Content Include="Views\Accounts\Signup.cshtml" />
     <Content Include="Views\Instructors\Create.cshtml" />
     <Content Include="Views\Instructors\Delete.cshtml" />
     <Content Include="Views\Instructors\Details.cshtml" />
@@ -300,7 +309,6 @@
     <Content Include="Views\Courses\Edit.cshtml" />
     <Content Include="Views\Courses\Index.cshtml" />
     <Content Include="Views\Courses\StudentView.cshtml" />
-    <Content Include="Views\Home\adminHomePage.cshtml" />
     <Content Include="Views\Program\GetRecipes.cshtml" />
     <Content Include="Views\Courses\EnrollList.cshtml" />
     <Content Include="Views\Courses\Alert.cshtml" />
@@ -317,9 +325,25 @@
     <Content Include="Views\Notes\Details.cshtml" />
     <Content Include="Views\Notes\Edit.cshtml" />
     <Content Include="Views\Notes\Index.cshtml" />
+    <Content Include="Views\Courses\InstructorView.cshtml" />
+    <Content Include="Views\materials\Create.cshtml" />
+    <Content Include="Views\materials\Delete.cshtml" />
+    <Content Include="Views\materials\Details.cshtml" />
+    <Content Include="Views\materials\Edit.cshtml" />
+    <Content Include="Views\materials\Index.cshtml" />
+    <Content Include="Views\Courses\material.cshtml" />
+    <Content Include="Views\Instructors\changePassword.cshtml" />
+    <Content Include="Views\Reviews\Create.cshtml" />
+    <Content Include="Views\Reviews\Delete.cshtml" />
+    <Content Include="Views\Reviews\Details.cshtml" />
+    <Content Include="Views\Reviews\Edit.cshtml" />
+    <Content Include="Views\Reviews\Index.cshtml" />
+    <Content Include="Views\Reviews\Admin.cshtml" />
+    <Content Include="Views\Logins\changePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="materials\" />
     <Folder Include="notes\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>

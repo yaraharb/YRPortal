@@ -1,0 +1,37 @@
+﻿@model IEnumerable<YRPortal.Models.material>
+
+@{
+    ViewBag.Title = "material";
+}
+
+<h2>Course Material</h2>
+
+<table class="table">
+    <tr>
+        <th>
+           Title
+        </th>
+        <th>
+            Content
+        </th>
+        <th>
+            Course Name 
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.title)
+        </td>
+        <td>
+            <a href="@Url.Action("DisplayFile", "materials", new { filePath = item.content })">Download File</a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.courseName)
+        </td>
+        
+    </tr>
+}
+
+</table>

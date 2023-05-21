@@ -22,7 +22,6 @@ namespace YRPortal.Controllers
         {
             return View(db.Instructors.ToList());
         }
-
         // GET: Instructors/Details/5
         public ActionResult Details(int? id)
         {
@@ -137,9 +136,10 @@ namespace YRPortal.Controllers
 
             return View();
         }
-
+        static int InstructorID;
         public ActionResult Assign(int id)
         {
+            
             List<int> AssignedCourses = new List<int>();
             using (SqlConnection con = new SqlConnection(StoreConnection.GetConnection()))
             {
@@ -167,9 +167,9 @@ namespace YRPortal.Controllers
             {
                 con.Open();
 
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO Teaches(InstructorID, CourseID) VALUES(@InstructorID, @CourseID)", con))
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO Teaches(LoginID, CourseID) VALUES(@LoginID, @CourseID)", con))
                 {
-                    cmd.Parameters.AddWithValue("@InstructorID", InstructorID);
+                    cmd.Parameters.AddWithValue("@LoginID", InstructorID) ;
                     cmd.Parameters.AddWithValue("@CourseID", id);
                     cmd.ExecuteNonQuery();
                 }
@@ -178,10 +178,30 @@ namespace YRPortal.Controllers
             return RedirectToAction("Index");
             
         }
-        static int InstructorID;
+
         public ActionResult AssignList(int id)
         {
-            InstructorID = id;
+            List<int> ids = new List<int>();
+            using (SqlConnection con = new SqlConnection(StoreConnection.GetConnection()))
+            {
+                using (SqlCommand cmd = new SqlCommand(" SELECT i.LoginID FROM Instructor i Where i.InstructorID = '" + id + "' ", con))
+                {
+
+                    if (con.State != System.Data.ConnectionState.Open)
+                        con.Open();
+                    SqlDataReader sdr = cmd.ExecuteReader();
+
+                    DataTable dt = new DataTable();
+                    dt.Load(sdr);
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        ids.Add((int)row["LoginID"]);
+                        InstructorID = (int)row["LoginID"];
+                    }
+
+                }
+            }
+            //InstructorID = (int)instructor.LoginID;
             List<int> AssignedCourses = new List<int>();
             using (SqlConnection con = new SqlConnection(StoreConnection.GetConnection()))
             {
@@ -206,6 +226,26 @@ namespace YRPortal.Controllers
                 Courses.RemoveAll(c => c.CourseID == courseId);
             }
             return View(Courses);
+        }
+        public ActionResult changePassword()
+        {
+            Login login = db.Logins.Find(GlobalID.ID);
+            if (login == null)
+            {
+                return HttpNotFound();
+            }
+            return View(login);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword([Bind(Include = "ID,Username,Password,Role")] Login login)
+        {
+
+            db.Entry(login).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("../Courses/InstructorView");
+
         }
     }
 }

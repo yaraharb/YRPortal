@@ -6,9 +6,6 @@
 
 <h2>List of courses that can be assigned</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -31,10 +28,13 @@
         <td>
             <form action="/Instructors/Assign" method="post">
                 <input type="hidden" name="id" value="@item.CourseID" />
-                <button type="submit" class="btn btn-primary">Assign</button>
+                <button type="submit" class="btn btn-primary" style=" background-color: #193441;">Assign</button>
             </form>
-        </td>s
+        </td>
     </tr>
 }
 
 </table>
+<div>
+    <a href="/Instructors/Index" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">Back</a>
+</div>

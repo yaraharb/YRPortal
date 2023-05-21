@@ -5,10 +5,10 @@
 }
 
 <h2>Courses</h2>
+<div>
+    <a href="/Courses/Create" type="button" class="btn btn-primary" style=" background-color: #193441; margin-bottom: 1%;}">Create a new course</a>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -31,15 +31,14 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.CourseID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.CourseID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.CourseID })
+                @Html.ActionLink("Delete", "Delete", new { id = item.CourseID }, new { style= "color: red" })
             </td>
         </tr>
     }
 
 
 
-</table>
+</table>  
 <div>
-    @Html.ActionLink("Back to List", "Index", "Logins")
+    <a href="/Logins/Index" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">Back</a>
 </div>

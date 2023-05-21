@@ -10,7 +10,7 @@ using YRPortal.Models;
 
 namespace YRPortal.Controllers
 {
-    [Authorize(Roles = "Student")]
+
     public class StudentsController : Controller
     {
         private PortalEntities4 db = new PortalEntities4();
@@ -22,10 +22,7 @@ namespace YRPortal.Controllers
         }
 
 
-        public ActionResult changePassword()
-        {
-            return View();
-        }
+        
 
         // GET: Students/Details/5
         public ActionResult Details(int? id)
@@ -129,6 +126,26 @@ namespace YRPortal.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult changePassword()
+        {
+            Login login = db.Logins.Find(GlobalID.ID);
+            if (login == null)
+            {
+                return HttpNotFound();
+            }
+            return View(login);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword([Bind(Include = "ID,Username,Password,Role")] Login login)
+        {
+
+            db.Entry(login).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("../Courses/StudentView");
+
         }
     }
 }

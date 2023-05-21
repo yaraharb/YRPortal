@@ -21,7 +21,7 @@ namespace YRPortal.Models
         public string status { get; set; }
         public int author { get; set; }
         public string courseName { get; set; }
-        public HttpPostedFileBase UploadFile { get; set; }
+        public HttpPostedFileBase UploadFile { get; set; }  
         public virtual Login Login { get; set; }
     }
 }

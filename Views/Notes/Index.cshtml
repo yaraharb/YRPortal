@@ -4,24 +4,23 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>My Notes</h2>
+<div>
+    <a href="/Notes/Create" type="button" class="btn btn-primary" style=" background-color: #193441; margin-bottom: 1%;}">Create new note</a>
+</div>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.title)
+            Title
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.content)
+            Content
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.status)
+           Status
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.courseName)
+            Course Name
         </th>
 
         <th></th>
@@ -44,10 +43,13 @@
             </td>
 
             <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                @Html.ActionLink("Delete", "Delete", new { id = item.id }, new {style = "color: red;"})
             </td>
         </tr>
     }
 
 </table>
 
+<div>
+    <a href="/Courses/StudentView" type="button" class="btn btn-primary" style=" background-color: #193441;position: relative; float: right; margin-top: 2%; margin-right: 1%;">Back</a>
+</div>

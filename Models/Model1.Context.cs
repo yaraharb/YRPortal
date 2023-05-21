@@ -30,9 +30,11 @@ namespace YRPortal.Models
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
-        public virtual DbSet<Teach> Teaches { get; set; }
         public virtual DbSet<EnrollsIn> EnrollsIns { get; set; }
         public virtual DbSet<Task> Tasks { get; set; }
         public virtual DbSet<Note> Notes { get; set; }
+        public virtual DbSet<Teach> Teaches { get; set; }
+        public virtual DbSet<material> materials { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
     }
 }

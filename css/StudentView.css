@@ -1,0 +1,76 @@
+﻿.changeBtn {
+    background-color: #193441;
+    position: relative;
+    float: right;
+}
+.enrollbtn {
+    background-color: #193441;
+    position: relative;
+    float: left;
+
+}
+.sideMenu{
+    height: 100%;
+    width: 12%;
+    min-width: 195px;
+    background-color: #193441;
+    left: 0% !important;
+    position: fixed ;
+    opacity: 1.5;
+}
+
+.list {
+    margin-top: 35%;
+    padding-left: 0% !important;
+}
+
+    .list li {
+        position: center;
+        border-bottom: 1px solid white;
+        padding: 0%;
+        text-align:center;
+    }
+
+        .list li a {
+            display: block;     
+            padding: 10px;
+            color: #fff;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .list li a:hover{
+            color: lightgray;
+        }
+
+/* Styling for the button */
+.menu-button {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Styling for the arrow icon */
+.menu-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-right: 10px;
+}
+
+/* Media query for screens smaller than 1466px */
+@media only screen and (max-width: 1466px) {
+    /* Hide the side menu */
+    .sideMenu {
+        z-index: 2;
+    }
+}
+

@@ -114,7 +114,9 @@ namespace YRPortal.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Entry(task).State = EntityState.Modified;
+                task.StudentID = GlobalID.ID;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
